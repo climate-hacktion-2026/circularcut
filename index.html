@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Offcut-to-Order</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@500;600;700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --ink:#241A0F; --ink-soft:#6E5B3F; --ink-faint:#9C875F;
+    --ground:#ECDFB4; --surface:#FBF6E7; --surface-raised:#F5E9C4;
+    --border:#C9AE78; --border-soft:#DBC79A;
+    --accent:#E05A1D; --accent-strong:#B8440F; --accent-soft:#F8D2AC; --accent-ink:#5A2409;
+    --accent2:#D98E10; --accent2-soft:#F6DFAE;
+    --success:#3C7A45; --success-soft:#D2E7CF; --success-ink:#1F3F22;
+    --danger:#BC3A2A; --danger-soft:#F3D2C3; --danger-ink:#5C1F13;
+    --shadow:rgba(36,26,15,0.28);
+    --grain:rgba(36,26,15,0.055);
+    --panel-fill:rgba(224,90,29,0.20);
+    --hatch-line:rgba(36,26,15,0.28);
+    --hero-ink:#241A0F;
+    --side-bg:#241A0F; --side-text:#F4E8CC; --side-text-faint:#B9A378; --side-border:rgba(244,232,204,0.16);
+  }
+  /* This product matches one fixed reference design (the "Timber Yard" wireframe),
+     so it intentionally does not auto-switch with the viewer's system dark mode.
+     A manual :root[data-theme="dark"] variant is kept below, opt-in only. */
+  :root[data-theme="dark"]{
+    --ink:#F4E8CC; --ink-soft:#C7AD80; --ink-faint:#8B7652;
+    --ground:#140E09; --surface:#241A10; --surface-raised:#2E2113;
+    --border:#4A3620; --border-soft:#382A19;
+    --accent:#FF7A33; --accent-strong:#FF9A5C; --accent-soft:#4A2710; --accent-ink:#FFD9AE;
+    --accent2:#F2B134; --accent2-soft:#3E2E0C;
+    --success:#72BE7E; --success-soft:#1F3321; --success-ink:#BBE6C2;
+    --danger:#FF8468; --danger-soft:#3C2015; --danger-ink:#FFCBBB;
+    --shadow:rgba(0,0,0,0.6);
+    --grain:rgba(244,232,204,0.045);
+    --panel-fill:rgba(255,154,92,0.22);
+    --hatch-line:rgba(244,232,204,0.22);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0; min-height:100vh; display:flex; flex-direction:row;
+    background-color:var(--ground);
+    background-image: radial-gradient(var(--grain) 1px, transparent 1.3px);
+    background-size:3px 3px;
+    color:var(--ink);
+    font-family:"Public Sans", -apple-system, "Segoe UI", sans-serif;
+    font-size:15px; line-height:1.55;
+  }
+  h1,h2,h3{ font-family:"Anton","Arial Narrow",sans-serif; font-weight:400; text-wrap:balance; letter-spacing:0.012em; margin:0; }
+  .mono{ font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace; font-variant-numeric:tabular-nums; }
+  .label-font{ font-family:"Oswald",sans-serif; text-transform:uppercase; letter-spacing:0.07em; }
+  a{ color:var(--accent-strong); }
+  button{ font-family:inherit; }
+  :focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; } }
+
+  /* ---------- layout shell ---------- */
+  .sidebar{
+    flex:0 0 234px; display:flex; flex-direction:column; gap:4px;
+    background-color:var(--side-bg); color:var(--side-text);
+    padding:22px 14px; position:sticky; top:0; align-self:flex-start; height:100vh; overflow-y:auto;
+  }
+  .brand{ display:flex; align-items:center; gap:11px; padding:2px 8px 18px; border-bottom:2px dashed var(--side-border); margin-bottom:12px;}
+  .brand-stamp{ width:46px; height:46px; flex:0 0 46px; color:var(--accent); transform:rotate(-9deg); }
+  .brand-stamp svg{ width:100%; height:100%; }
+  .brand-name{ font-family:"Oswald",sans-serif; font-weight:700; text-transform:uppercase; font-size:15px; letter-spacing:0.02em; line-height:1.15; color:var(--side-text); }
+  .brand-sub{ font-size:10.5px; color:var(--accent); letter-spacing:0.09em; text-transform:uppercase; font-family:"Oswald"; font-weight:600; }
+
+  .navbtn{
+    display:flex; align-items:center; gap:10px; text-align:left; width:100%; position:relative;
+    background:transparent; border:none; border-radius:3px; padding:11px 13px;
+    color:var(--side-text); font-family:"Oswald",sans-serif; text-transform:uppercase; letter-spacing:0.03em;
+    font-size:13px; font-weight:600; cursor:pointer;
+  }
+  .navbtn svg{ width:17px; height:17px; flex:0 0 17px; color:var(--side-text-faint); }
+  .navbtn:hover{ background:rgba(244,232,204,0.08); }
+  .navbtn[aria-current="true"]{ background:var(--accent); color:var(--hero-ink); box-shadow:3px 3px 0 rgba(0,0,0,0.35); }
+  .navbtn[aria-current="true"] svg{ color:var(--hero-ink); }
+  #navList{ display:flex; flex-direction:column; gap:7px; }
+  .nav-spacer{ flex:1; }
+  .side-footer{ padding:10px 10px; font-size:10.5px; color:var(--side-text-faint); border-top:2px dashed var(--side-border); margin-top:8px; font-family:"Oswald"; letter-spacing:0.03em; text-transform:uppercase; line-height:1.6; }
+
+  .main{ flex:1; min-width:0; padding:0 clamp(18px,4vw,52px) 60px; }
+  .wrap{ max-width:1080px; margin:0 auto; padding-top:28px; }
+  section[data-panel]{ display:flex; flex-direction:column; gap:28px; }
+
+  @media (max-width:760px){
+    body{ flex-direction:column; }
+    .sidebar{
+      flex:0 0 auto; width:100%; height:auto; position:sticky; top:0; z-index:5;
+      flex-direction:row; align-items:center; gap:10px; overflow-x:auto;
+      padding:10px 14px; border-bottom:2px solid var(--side-border);
+    }
+    .brand{ border-bottom:none; margin-bottom:0; padding:0; flex:0 0 auto; }
+    .brand-sub{ display:none; }
+    #navList{ flex-direction:row; overflow-x:auto; }
+    .navbtn{ width:auto; white-space:nowrap; }
+    .navbtn[aria-current="true"]{ box-shadow:none; }
+    .nav-spacer, .side-footer{ display:none; }
+  }
+
+  .eyebrow{ font-family:"Oswald",sans-serif; font-size:11.5px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent-strong); display:flex; align-items:center; gap:7px; }
+  .eyebrow::before{ content:""; width:18px; height:2px; background:var(--accent); display:inline-block; }
+  .page-head h2{ font-size:clamp(34px,5vw,48px); margin-top:8px; line-height:0.95; }
+  .page-head p{ color:var(--ink-soft); max-width:62ch; margin-top:8px; font-size:15px; }
+
+  .chip{ display:inline-flex; align-items:center; gap:5px; font-family:"Oswald"; text-transform:uppercase; letter-spacing:0.04em; font-size:11px; font-weight:600; padding:3px 9px; border-radius:3px; border:1px solid var(--border); color:var(--ink-soft); white-space:nowrap; }
+  .chip.accent{ background:var(--accent-soft); color:var(--accent-ink); border-color:transparent; }
+  .chip.success{ background:var(--success-soft); color:var(--success-ink); border-color:transparent; }
+  .chip.danger{ background:var(--danger-soft); color:var(--danger-ink); border-color:transparent; }
+  .chip.outline{ background:transparent; }
+
+  .card{ background:var(--surface); border:1px solid var(--border); border-radius:5px; }
+  .card.pad{ padding:20px; }
+
+  .btn{ display:inline-flex; align-items:center; gap:7px; border-radius:4px; padding:10px 18px; font-family:"Oswald"; text-transform:uppercase; letter-spacing:0.04em; font-weight:600; font-size:12.5px; cursor:pointer; border:2px solid transparent; position:relative; top:0; transition:top .08s ease, box-shadow .08s ease; }
+  .btn-primary{ background:var(--accent); color:var(--surface); box-shadow:0 3px 0 var(--accent-strong); }
+  .btn-primary:hover{ background:#ED6A2B; }
+  .btn-primary:active{ top:3px; box-shadow:0 0 0 var(--accent-strong); }
+  .btn-ghost{ background:var(--surface); border-color:var(--border); color:var(--ink); box-shadow:0 3px 0 var(--border); }
+  .btn-ghost:hover{ color:var(--accent-strong); }
+  .btn-ghost:active{ top:3px; box-shadow:0 0 0 var(--border); }
+  .btn-sm{ padding:7px 12px; font-size:11.5px; }
+  .btn:disabled{ opacity:0.5; cursor:not-allowed; }
+
+  label.field-label{ font-family:"Oswald"; font-size:11.5px; font-weight:600; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.05em; display:block; margin-bottom:5px; }
+  input[type="text"], input[type="number"], select, textarea{
+    width:100%; background:var(--surface-raised); border:1px solid var(--border); border-radius:4px;
+    padding:8px 10px; font-size:13.5px; color:var(--ink); font-family:inherit;
+  }
+  input.mono, select.mono{ font-family:"IBM Plex Mono",monospace; }
+  .field{ display:flex; flex-direction:column; gap:2px; }
+  .field-hint{ font-size:11.5px; color:var(--ink-faint); }
+  .checkrow{ display:flex; align-items:flex-start; gap:8px; font-size:13px; color:var(--ink-soft); }
+  .checkrow input{ margin-top:3px; }
+
+  /* ---------- hero / saw edge ---------- */
+  .hero-band{
+    background:var(--accent); border:1px solid var(--accent); border-top:none; color:var(--hero-ink);
+    margin:0 -1px; padding:36px clamp(18px,3vw,40px) 34px; display:flex; flex-direction:column; gap:18px;
+  }
+  .hero-band .eyebrow{ color:var(--hero-ink); opacity:0.78; }
+  .hero-band .eyebrow::before{ background:var(--hero-ink); opacity:0.7; }
+  .saw-edge{ height:18px; margin-top:-1px; }
+  .saw-edge svg{ display:block; width:100%; height:100%; }
+  .hero-top{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:22px; align-items:flex-start; }
+  .pillar-card{
+    display:flex; flex-direction:column; align-items:center; gap:3px; text-align:center;
+    font-family:"Oswald"; text-transform:uppercase; font-size:10.5px; font-weight:700; letter-spacing:0.06em;
+    color:var(--hero-ink); background:rgba(0,0,0,0.08); border:1.5px dashed var(--hero-ink);
+    padding:12px 18px; border-radius:3px; transform:rotate(-1.6deg); white-space:nowrap;
+  }
+  .pillar-card .pdot{ opacity:0.55; font-size:9px; }
+  .hero-title{ font-size:clamp(42px,7.4vw,84px); line-height:0.84; margin-top:8px; color:var(--hero-ink); }
+  .hero-tag{ color:var(--hero-ink); opacity:0.88; max-width:56ch; font-size:16.5px; margin-top:12px; }
+  .team-tag{ font-family:"Oswald"; text-transform:uppercase; letter-spacing:0.04em; font-size:11px; color:var(--hero-ink); opacity:0.65; margin-top:12px; }
+  .hero-ctas{ display:flex; gap:10px; flex-wrap:wrap; margin-top:20px; }
+  .btn-hero-primary{ background:var(--hero-ink); color:#F6E9D2; box-shadow:0 3px 0 rgba(0,0,0,0.4); }
+  .btn-hero-primary:hover{ background:#000; }
+  .btn-hero-ghost{ background:transparent; border-color:var(--hero-ink); color:var(--hero-ink); box-shadow:none; }
+  .btn-hero-ghost:hover{ background:rgba(0,0,0,0.1); }
+
+  .stat-bar{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+  @media (max-width:760px){ .stat-bar{ grid-template-columns:repeat(2,1fr); } }
+  .stat-cell{ background:var(--surface); border:1px solid var(--border); border-radius:5px; padding:16px 18px; }
+  .stat-cell.scenario-cell{ border:1.5px dashed var(--accent); }
+  .stat-label{ font-family:"Oswald"; text-transform:uppercase; letter-spacing:0.05em; font-size:10.5px; color:var(--ink-faint); margin-bottom:6px; display:flex; align-items:center; gap:6px; }
+  .stat-value{ font-family:"Anton"; font-size:clamp(26px,3.2vw,36px); color:var(--ink); line-height:1; }
+  .stat-unit{ font-family:"Public Sans"; font-size:14px; margin-left:3px; color:var(--ink-soft); font-weight:600; }
+  .stat-note{ font-size:11px; color:var(--ink-faint); margin-top:5px; }
+  .scenario-flag{ color:var(--accent-strong); border:1px dashed var(--accent); padding:1px 5px; border-radius:3px; font-size:9px; font-family:"Oswald"; text-transform:uppercase; }
+
+  .section-head{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+  .demo-section{ border-color:var(--border); }
+  .section-head h2{ font-size:clamp(24px,3vw,30px); }
+  .section-cut{ flex:1; min-width:40px; height:0; border-top:2px dashed var(--border); position:relative; top:-4px; }
+
+  .demo-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  @media (max-width:760px){ .demo-grid{ grid-template-columns:1fr; } }
+  .demo-card{ position:relative; overflow:visible; }
+  .demo-card .demo-head{ display:flex; justify-content:space-between; align-items:center; padding:13px 16px; border-bottom:2px dashed var(--border); }
+  .demo-card .demo-head h3{ font-size:14.5px; font-family:"Oswald"; font-weight:700; text-transform:uppercase; letter-spacing:0.03em; }
+  .demo-card .demo-body{ padding:12px 16px 16px; }
+  .demo-reason{ font-size:12.5px; color:var(--ink-soft); margin-top:9px; }
+
+  .stamp{ position:absolute; top:6px; right:6px; width:82px; height:82px; display:flex; align-items:center; justify-content:center; transform:rotate(-13deg); opacity:0.92; pointer-events:none; z-index:2; }
+  .stamp svg{ position:absolute; inset:0; width:100%; height:100%; }
+  .stamp .stamp-label{ font-family:"Oswald"; font-weight:700; font-size:13px; letter-spacing:0.02em; position:relative; text-transform:uppercase; display:block; text-align:center; }
+  .stamp .stamp-fraction{ font-family:"IBM Plex Mono",monospace; font-size:8px; letter-spacing:0.04em; position:relative; display:block; text-align:center; opacity:0.85; margin-top:1px; }
+  .stamp-ok{ color:var(--success); }
+  .stamp-no{ color:var(--danger); }
+  .stamp .ring{ fill:none; stroke:currentColor; }
+
+  .steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  @media (max-width:760px){ .steps{ grid-template-columns:1fr; } }
+  .step{ padding:20px 16px 16px; }
+  .step:nth-child(1){ transform:rotate(-0.8deg); }
+  .step:nth-child(2){ transform:rotate(0.5deg); }
+  .step:nth-child(3){ transform:rotate(-0.5deg); }
+  .step-top{ display:flex; justify-content:space-between; align-items:flex-start; }
+  .step .step-num{ font-family:"Anton"; font-size:26px; color:var(--accent); line-height:1; }
+  .step .step-icon{ width:18px; height:18px; color:var(--ink-faint); }
+  .step h4{ font-size:16.5px; margin-top:8px; font-family:"Oswald"; text-transform:uppercase; letter-spacing:0.02em; font-weight:700; }
+  .step p{ font-size:12.5px; color:var(--ink-soft); margin-top:6px; }
+
+  /* ---------- marketplace ---------- */
+  .toolbar{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between; }
+  .search-field{ max-width:300px; flex:1; }
+  .listing-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(258px,1fr)); gap:20px 16px; padding-top:4px; }
+  .tag-card{
+    position:relative; background:var(--surface-raised); border:1px solid var(--border);
+    padding:16px 16px 16px 26px; display:flex; flex-direction:column; gap:10px;
+    clip-path: polygon(16px 0, 100% 0, 100% 100%, 16px 100%, 0 50%);
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  .listing-grid .tag-card:nth-child(odd){ transform:rotate(-0.9deg); }
+  .listing-grid .tag-card:nth-child(even){ transform:rotate(0.9deg); }
+  .tag-card:hover{ transform:rotate(0deg) translateY(-3px); box-shadow:0 10px 18px -10px var(--shadow); }
+  .tag-hole{ position:absolute; left:5px; top:50%; transform:translateY(-50%); width:8px; height:8px; border-radius:50%; background:var(--ground); border:1.5px solid var(--border); }
+  .listing-top{ display:flex; justify-content:space-between; gap:8px; align-items:flex-start; }
+  .listing-species{ font-weight:700; font-size:15.5px; font-family:"Oswald"; text-transform:uppercase; letter-spacing:0.01em; }
+  .listing-seller{ font-size:11.5px; color:var(--ink-faint); margin-top:2px; }
+  .listing-dims{ font-family:"Anton"; font-size:26px; color:var(--accent-strong); line-height:1; }
+  .listing-dims span{ font-family:"Public Sans"; font-size:13px; color:var(--ink-soft); font-weight:600; }
+  .listing-meta{ display:flex; flex-wrap:wrap; gap:6px; }
+  .listing-note{ font-size:12px; color:var(--ink-soft); }
+  .listing-foot{ display:flex; justify-content:space-between; align-items:center; margin-top:auto; gap:8px; padding-top:4px; border-top:1px dashed var(--border); }
+
+  /* ---------- planner ---------- */
+  .planner-grid{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.3fr); gap:20px; align-items:start; }
+  @media (max-width:900px){ .planner-grid{ grid-template-columns:1fr; } }
+  .row-grid{ display:grid; grid-template-columns:minmax(64px,1.1fr) minmax(66px,0.8fr) minmax(66px,0.8fr) minmax(46px,0.6fr) minmax(66px,0.8fr) minmax(66px,0.8fr) auto; gap:8px; align-items:end; }
+  @media (max-width:900px){ .row-grid{ grid-template-columns:repeat(2,1fr); } }
+  .row-grid .field-label{ margin-bottom:3px; }
+  .panel-rows{ display:flex; flex-direction:column; gap:10px; overflow-x:auto; }
+  .panel-row-wrap{ border:1px solid var(--border-soft); border-radius:4px; padding:10px; background:var(--surface-raised); }
+  .row-head-labels{ display:none; }
+  @media (min-width:901px){ .row-head-labels{ display:grid; } }
+
+  .result-card{ padding:16px; display:flex; flex-direction:column; gap:10px; position:relative; overflow:visible; }
+  .result-head{ display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; }
+  .result-head h4{ font-family:"Oswald"; font-size:13.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.03em; }
+  .diagram-wrap{ background:var(--surface-raised); background-image: repeating-linear-gradient(0deg, var(--border-soft) 0 1px, transparent 1px 22px), repeating-linear-gradient(90deg, var(--border-soft) 0 1px, transparent 1px 22px); border:1px solid var(--border-soft); border-radius:4px; padding:10px; overflow-x:auto; }
+  .diagram-wrap svg{ width:100%; height:auto; display:block; }
+  .legend{ display:flex; gap:14px; flex-wrap:wrap; font-family:"Oswald"; text-transform:uppercase; letter-spacing:0.03em; font-size:10.5px; color:var(--ink-soft); }
+  .legend span{ display:inline-flex; align-items:center; gap:5px; }
+  .legend i{ width:11px; height:11px; border-radius:2px; display:inline-block; border:1px solid var(--border); }
+  .waste-stat{ font-size:12.5px; color:var(--ink-soft); }
+
+  .banner{ border-radius:4px; padding:13px 15px; font-size:13px; display:flex; gap:10px; align-items:flex-start; border:1px dashed; }
+  .banner.success{ background:var(--success-soft); color:var(--success-ink); border-color:var(--success); }
+  .banner.danger{ background:var(--danger-soft); color:var(--danger-ink); border-color:var(--danger); }
+  .banner.info{ background:var(--accent-soft); color:var(--accent-ink); border-color:var(--accent); }
+
+  /* ---------- impact ---------- */
+  .assumptions-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+  @media (max-width:640px){ .assumptions-grid{ grid-template-columns:1fr; } }
+  table.simple{ width:100%; border-collapse:collapse; font-size:13px; }
+  table.simple th{ text-align:left; font-family:"Oswald"; font-size:10.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--ink-faint); padding:7px 8px; border-bottom:2px dashed var(--border); }
+  table.simple td{ padding:8px 8px; border-bottom:1px dashed var(--border-soft); color:var(--ink-soft); }
+  .table-wrap{ overflow-x:auto; }
+
+  [hidden]{ display:none !important; }
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="brand">
+    <div class="brand-stamp">
+      <svg viewBox="0 0 64 64" fill="none">
+        <circle cx="32" cy="32" r="29" stroke="currentColor" stroke-width="2.4"/>
+        <circle cx="32" cy="32" r="7" stroke="currentColor" stroke-width="2.4"/>
+        <path d="M32 7v8M32 49v8M7 32h8M49 32h8M14.5 14.5l5.7 5.7M43.8 43.8l5.7 5.7M14.5 49.5l5.7-5.7M43.8 20.2l5.7-5.7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div>
+      <div class="brand-name">Offcut&#8209;to&#8209;Order</div>
+      <div class="brand-sub">Timber Exchange</div>
+    </div>
+  </div>
+  <nav id="navList"></nav>
+  <div class="nav-spacer"></div>
+  <div class="side-footer">Hollow Log Joinery<br>Brunswick 3056</div>
+</div>
+
+<div class="main"><div class="wrap" id="app"></div></div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ================= constants ================= */
+  var STORAGE_KEY = "offcutToOrder_v4";
+  var SPECIES_DENSITY = {
+    "Spotted Gum": 950, "Blackbutt": 910, "Victorian Ash": 624, "Jarrah": 823,
+    "Hoop Pine Ply": 559, "Tasmanian Oak": 650, "MDF": 650, "Melamine particleboard": 680
+  };
+  var TABS = [
+    { id:"overview", label:"Overview", icon:'<path d="M4 3v18h18"/><path d="M8 19v-4M12 19v-7M16 19v-3"/>' },
+    { id:"marketplace", label:"Marketplace", icon:'<rect x="4" y="15" width="16" height="3"/><rect x="6" y="10" width="12" height="3"/><rect x="8" y="5" width="8" height="3"/>' },
+    { id:"list", label:"List an Offcut", icon:'<rect x="4" y="9" width="16" height="7" rx="1"/><path d="M12 7v10M8 12h8"/>' },
+    { id:"planner", label:"Plan a Cut", icon:'<circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M4.5 4.5l2.1 2.1M17.4 17.4l2.1 2.1M3 12h3M18 12h3M4.5 19.5l2.1-2.1M17.4 6.6l2.1-2.1"/>' },
+    { id:"impact", label:"Impact", icon:'<rect x="3" y="4" width="18" height="16" rx="1"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 15l-5-5-11 11"/>' }
+  ];
+
+  /* ================= state ================= */
+  function escapeHtml(s){ return String(s==null?"":s).replace(/[&<>"']/g, function(c){ return ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]; }); }
+  function uid(p){ return p + Math.random().toString(36).slice(2,9); }
+  function round1(n){ return Math.round(n*10)/10; }
+  function round2(n){ return Math.round(n*100)/100; }
+  function fmtMm(n){ var r = Math.round(n*10)/10; return (Math.abs(r%1)<1e-6) ? String(Math.round(r)) : r.toFixed(1); }
+
+  function seedState(){
+    return {
+      listings:[
+        { id:"L1", seller:"Hollow Log Joinery", species:"Spotted Gum", w:1200, h:600, thickness:32, density:950, location:"Brunswick, VIC", condition:"clean", landfill:true, status:"available", notes:"Offcut from a benchtop job. One small knot near the left edge. Pick-up weekdays before 3pm." },
+        { id:"L2", seller:"Merri Creek Cabinets", species:"Blackbutt", w:900, h:600, thickness:25, density:910, location:"Coburg, VIC", condition:"clean", landfill:true, status:"available", notes:"Minor end-checks on one corner, otherwise straight and square." },
+        { id:"L3", seller:"Sawdust & Sons", species:"Victorian Ash", w:1500, h:450, thickness:19, density:624, location:"Collingwood, VIC", condition:"clean", landfill:false, status:"reserved", notes:"Clean, dressed both faces. Leftover from a shelving run." },
+        { id:"L4", seller:"Westside Stairs", species:"Jarrah", w:800, h:300, thickness:40, density:823, location:"Footscray, VIC", condition:"reclaimed", landfill:true, status:"available", notes:"Reclaimed stair tread, a few old nail holes near one end." },
+        { id:"L5", seller:"Northcote Fitouts", species:"Hoop Pine Ply", w:1220, h:700, thickness:18, density:559, location:"Northcote, VIC", condition:"clean", landfill:false, status:"available", notes:"One face lightly marked, the other clean. Good for a carcass or jig." },
+        { id:"L6", seller:"Hollow Log Joinery", species:"Tasmanian Oak", w:1000, h:400, thickness:25, density:650, location:"Brunswick, VIC", condition:"clean", landfill:true, status:"picked-up", notes:"Clean, dressed. Trimmed from a stair stringer." }
+      ],
+      reservations:[
+        { id:uid("r_"), listingId:"L3", species:"Victorian Ash", areaMm2:610000, weightKg:0, thicknessMm:19, timestamp:"2026-09-28T10:00:00", pickedUp:false },
+        { id:uid("r_"), listingId:"L6", species:"Tasmanian Oak", areaMm2:360000, weightKg:0, thicknessMm:25, timestamp:"2026-09-20T10:00:00", pickedUp:true }
+      ],
+      assumptions:{ co2Factor:0.45, co2Source:"", transportFactor:1.8, kerfMm:3 }
+    };
+  }
+  // backfill weightKg for seeded reservations using density lookup
+  function finishSeed(s){
+    s.reservations.forEach(function(r){
+      var listing = s.listings.filter(function(l){ return l.id===r.listingId; })[0];
+      var density = listing ? listing.density : 650;
+      r.weightKg = round2((r.areaMm2/1000000) * (r.thicknessMm/1000) * density);
+    });
+    return s;
+  }
+
+  var state;
+  try{
+    var raw = localStorage.getItem(STORAGE_KEY);
+    state = raw ? JSON.parse(raw) : finishSeed(seedState());
+  }catch(e){ state = finishSeed(seedState()); }
+
+  function save(){ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){} }
+
+  /* ================= packing engine ================= */
+  // Guillotine, best-area-fit rectangle packing with saw-kerf allowance.
+  function expandPanels(rows, useMin){
+    var out = [];
+    rows.forEach(function(row, ri){
+      var w = useMin ? (row.minW || row.w) : row.w;
+      var h = useMin ? (row.minH || row.h) : row.h;
+      var qty = Math.max(1, row.qty|0);
+      for(var i=0;i<qty;i++){
+        var label = row.name ? row.name : ("Panel " + (ri+1));
+        if(qty>1) label += " " + String.fromCharCode(65+i);
+        out.push({ w:w, h:h, label:label });
+      }
+    });
+    return out;
+  }
+
+  function packSheet(sheetW, sheetH, panels, kerf, allowRotate){
+    var freeRects = [{ x:0, y:0, w:sheetW, h:sheetH }];
+    var placements = [];
+    var ordered = panels.slice().sort(function(a,b){ return (b.w*b.h)-(a.w*a.h); });
+    var failed = null;
+
+    for(var i=0;i<ordered.length;i++){
+      var p = ordered[i];
+      var orientations = allowRotate ? [[p.w,p.h],[p.h,p.w]] : [[p.w,p.h]];
+      var best=null, bestScore=Infinity, bestDims=null;
+      for(var r=0;r<freeRects.length;r++){
+        var rect = freeRects[r];
+        for(var o=0;o<orientations.length;o++){
+          var pw=orientations[o][0], ph=orientations[o][1];
+          if(pw<=rect.w+1e-6 && ph<=rect.h+1e-6){
+            var score = rect.w*rect.h - pw*ph;
+            if(score<bestScore){ bestScore=score; best=rect; bestDims=[pw,ph]; }
+          }
+        }
+      }
+      if(!best){
+        var maxRect=null;
+        freeRects.forEach(function(fr){ if(!maxRect || fr.w*fr.h>maxRect.w*maxRect.h) maxRect=fr; });
+        failed = { panel:p, available:maxRect };
+        break;
+      }
+      var pw=bestDims[0], ph=bestDims[1];
+      placements.push({ label:p.label, x:best.x, y:best.y, w:pw, h:ph });
+      freeRects = freeRects.filter(function(fr){ return fr!==best; });
+      var rightW = best.w - pw - kerf;
+      var bottomH = best.h - ph - kerf;
+      if(rightW>1e-6) freeRects.push({ x:best.x+pw+kerf, y:best.y, w:rightW, h:ph });
+      if(bottomH>1e-6) freeRects.push({ x:best.x, y:best.y+ph+kerf, w:best.w, h:bottomH });
+    }
+
+    var usedArea = placements.reduce(function(s,pl){ return s+pl.w*pl.h; }, 0);
+    return { success:!failed, placements:placements, freeRects:freeRects, failed:failed, sheetW:sheetW, sheetH:sheetH, usedArea:usedArea, sheetArea:sheetW*sheetH, panelCount:ordered.length };
+  }
+
+  function failureMessage(result){
+    if(!result.failed) return "";
+    var p = result.failed.panel, av = result.failed.available;
+    if(!av) return "There's no space left on the offcut big enough for " + escapeHtml(p.label) + ".";
+    var shortW = p.w - av.w, shortH = p.h - av.h;
+    if(shortW >= shortH){
+      return escapeHtml(p.label) + " needs " + fmtMm(p.w) + "mm of width, but only " + fmtMm(av.w) + "mm is left — short by " + fmtMm(shortW) + "mm.";
+    }
+    return escapeHtml(p.label) + " needs " + fmtMm(p.h) + "mm of height, but only " + fmtMm(av.h) + "mm is left — short by " + fmtMm(shortH) + "mm.";
+  }
+
+  function planCut(rows, sheetW, sheetH, kerfMm, allowRotate){
+    var kerf = kerfMm;
+    var attempts = [];
+    var r1 = packSheet(sheetW, sheetH, expandPanels(rows,false), kerf, allowRotate);
+    attempts.push({ result:r1, mode:"requested" });
+    if(!r1.success){
+      var adjustable = rows.some(function(row){ return (row.minW && row.minW<row.w) || (row.minH && row.minH<row.h); });
+      if(adjustable){
+        var r2 = packSheet(sheetW, sheetH, expandPanels(rows,true), kerf, allowRotate);
+        attempts.push({ result:r2, mode:"adjusted" });
+      }
+    }
+    return attempts;
+  }
+
+  /* ================= SVG diagram ================= */
+  var diagramCounter = 0;
+  function renderDiagramSVG(result, kerfMm){
+    diagramCounter++;
+    var uidn = diagramCounter;
+    var fit = 420;
+    var scale = fit / Math.max(result.sheetW, result.sheetH, 1);
+    var margin = 36, bottomPad = 10;
+    var drawW = result.sheetW*scale, drawH = result.sheetH*scale;
+    var vbW = drawW + margin*2, vbH = drawH + margin*1.6 + bottomPad;
+    var ox = margin, oy = margin*1.2;
+
+    var svg = '<svg viewBox="0 0 '+vbW.toFixed(1)+' '+vbH.toFixed(1)+'" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cut diagram">';
+    svg += '<defs>'+
+      '<pattern id="hatch'+uidn+'" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" class="hatchLine"/></pattern>'+
+      '<marker id="arrow'+uidn+'" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5.2" markerHeight="5.2" orient="auto-start-reverse"><path d="M0 1L9 5L0 9z" class="arrowHead"/></marker>'+
+    '</defs>';
+    svg += '<style>.sheetOutline{fill:var(--surface);stroke:var(--ink);stroke-width:1.6;} .panelRect{fill:var(--surface);stroke:var(--ink);stroke-width:1.8;} .wasteRect{fill:url(#hatch'+uidn+');stroke:var(--border);stroke-width:1;} .hatchLine{stroke:var(--hatch-line);stroke-width:1.5;} .arrowHead{fill:var(--ink-faint);} .kerfLine{stroke:var(--accent-strong);stroke-width:1.6;} .kerfTick{stroke:var(--accent-strong);stroke-width:1.4;} .dimLine{stroke:var(--ink-faint);stroke-width:1.1;} .dimText{fill:var(--ink-soft);font-family:"IBM Plex Mono",monospace;font-size:10.5px;} .panelText{fill:var(--ink);font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;}</style>';
+
+    svg += '<rect class="sheetOutline" x="'+ox+'" y="'+oy+'" width="'+drawW.toFixed(1)+'" height="'+drawH.toFixed(1)+'"/>';
+
+    var dy = oy - 14;
+    svg += '<line class="dimLine" x1="'+ox+'" y1="'+dy+'" x2="'+(ox+drawW)+'" y2="'+dy+'" marker-start="url(#arrow'+uidn+')" marker-end="url(#arrow'+uidn+')"/>';
+    svg += '<text class="dimText" x="'+(ox+drawW/2)+'" y="'+(dy-5)+'" text-anchor="middle">'+fmtMm(result.sheetW)+' mm</text>';
+
+    var dx = ox - 14;
+    svg += '<line class="dimLine" x1="'+dx+'" y1="'+oy+'" x2="'+dx+'" y2="'+(oy+drawH)+'" marker-start="url(#arrow'+uidn+')" marker-end="url(#arrow'+uidn+')"/>';
+    svg += '<text class="dimText" x="'+(dx-5)+'" y="'+(oy+drawH/2)+'" text-anchor="middle" transform="rotate(-90 '+(dx-5)+' '+(oy+drawH/2)+')">'+fmtMm(result.sheetH)+' mm</text>';
+
+    result.freeRects.forEach(function(fr){
+      if(fr.w<=0.01 || fr.h<=0.01) return;
+      svg += '<rect class="wasteRect" x="'+(ox+fr.x*scale).toFixed(1)+'" y="'+(oy+fr.y*scale).toFixed(1)+'" width="'+(fr.w*scale).toFixed(1)+'" height="'+(fr.h*scale).toFixed(1)+'"/>';
+    });
+
+    result.placements.forEach(function(pl){
+      var px=ox+pl.x*scale, py=oy+pl.y*scale, pw=pl.w*scale, ph=pl.h*scale;
+      svg += '<rect class="panelRect" x="'+px.toFixed(1)+'" y="'+py.toFixed(1)+'" width="'+pw.toFixed(1)+'" height="'+ph.toFixed(1)+'"/>';
+      if(pw>34 && ph>16){
+        svg += '<text class="panelText" x="'+(px+pw/2).toFixed(1)+'" y="'+(py+ph/2+3).toFixed(1)+'" text-anchor="middle">'+escapeHtml(pl.label)+' &#183; '+fmtMm(pl.w)+'&times;'+fmtMm(pl.h)+'</text>';
+      }
+      if(px+pw+2 < ox+drawW-1){
+        var kx = px+pw+ (kerfMm*scale)/2;
+        var step = 9, tick = 3.2;
+        for(var ty = py+6; ty <= py+ph-4; ty += step){
+          svg += '<line class="kerfTick" x1="'+kx.toFixed(1)+'" y1="'+(ty-tick).toFixed(1)+'" x2="'+kx.toFixed(1)+'" y2="'+(ty+tick).toFixed(1)+'"/>';
+        }
+      }
+    });
+
+    svg += '</svg>';
+    return svg;
+  }
+
+  function diagramLegend(){
+    return '<div class="legend">' +
+      '<span><i style="background:var(--panel-fill);border-color:var(--accent-strong);"></i>Panel cut</span>' +
+      '<span><i style="background:transparent;border:none;border-top:2px dashed var(--accent-strong);"></i>Saw kerf</span>' +
+      '<span><i style="background:repeating-linear-gradient(45deg,var(--hatch-line) 0 1.5px,transparent 1.5px 4px);"></i>Remaining offcut</span>' +
+      '</div>';
+  }
+
+  /* ================= derived impact numbers ================= */
+  function computeImpact(){
+    var totalListings = state.listings.length;
+    var areaMatchedMm2 = state.reservations.reduce(function(s,r){ return s+r.areaMm2; },0);
+    var weightMatchedKg = state.reservations.reduce(function(s,r){ return s+r.weightKg; },0);
+    var weightReusedKg = state.reservations.filter(function(r){ return r.pickedUp; }).reduce(function(s,r){ return s+r.weightKg; },0);
+    var landfillDiverted = state.listings.filter(function(l){ return l.landfill && (l.status==="reserved"||l.status==="picked-up"); }).length;
+    var co2e = weightMatchedKg*state.assumptions.co2Factor - state.reservations.length*state.assumptions.transportFactor;
+    return {
+      totalListings:totalListings, areaMatchedM2:areaMatchedMm2/1000000, weightMatchedKg:weightMatchedKg,
+      weightReusedKg:weightReusedKg, landfillDiverted:landfillDiverted, co2e:co2e
+    };
+  }
+
+  /* ================= planner working state ================= */
+  var planner = {
+    sourceId:"L1",
+    sheetW:1200, sheetH:600,
+    allowRotate:false,
+    rows:[
+      { name:"Door A", w:550, h:400, qty:1, minW:520, minH:380 },
+      { name:"Door B", w:550, h:400, qty:1, minW:520, minH:380 }
+    ],
+    attempts:null,
+    reservedNotice:null
+  };
+
+  function activeListing(){ return state.listings.filter(function(l){ return l.id===planner.sourceId; })[0]; }
+  function syncSheetFromSource(){
+    var l = activeListing();
+    if(l){ planner.sheetW=l.w; planner.sheetH=l.h; }
+  }
+
+  var recalcTimer = null;
+  function debouncedRecalc(){ clearTimeout(recalcTimer); recalcTimer = setTimeout(recalc, 200); }
+  function recalc(){
+    syncSheetFromSource();
+    planner.attempts = planCut(planner.rows, planner.sheetW, planner.sheetH, state.assumptions.kerfMm, planner.allowRotate);
+    planner.reservedNotice = null;
+    var el = document.getElementById("plannerResults");
+    if(el){ el.innerHTML = plannerResultsHTML(); bindResultsButtons(); }
+  }
+  function bindResultsButtons(){
+    var reserveBtn = document.getElementById("reserveBtn");
+    if(reserveBtn) reserveBtn.addEventListener("click", reserveFromPlanner);
+    var browseOtherBtn = document.getElementById("browseOtherBtn");
+    if(browseOtherBtn) browseOtherBtn.addEventListener("click", function(){ setTab("marketplace"); });
+  }
+
+  function reserveFromPlanner(){
+    var listing = activeListing();
+    var winning = planner.attempts && planner.attempts.filter(function(a){ return a.result.success; }).pop();
+    if(!listing || !winning) return;
+    var weightKg = round2((winning.result.usedArea/1000000) * (listing.thickness/1000) * listing.density);
+    state.reservations.push({ id:uid("r_"), listingId:listing.id, species:listing.species, areaMm2:winning.result.usedArea, weightKg:weightKg, thicknessMm:listing.thickness, timestamp:new Date().toISOString(), pickedUp:false });
+    listing.status = "reserved";
+    planner.reservedNotice = listing.seller;
+    save(); render();
+  }
+
+  function markPickedUp(listingId){
+    var listing = state.listings.filter(function(l){ return l.id===listingId; })[0];
+    if(listing) listing.status = "picked-up";
+    state.reservations.forEach(function(r){ if(r.listingId===listingId) r.pickedUp=true; });
+    save(); render();
+  }
+
+  /* ================= nav ================= */
+  var activeTab = "overview";
+  function setTab(id){ activeTab=id; render(); window.scrollTo(0,0); }
+  function renderNav(){
+    var nav = document.getElementById("navList");
+    nav.innerHTML = TABS.map(function(t){
+      return '<button class="navbtn" data-tab="'+t.id+'" aria-current="'+(activeTab===t.id)+'">'+
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+t.icon+'</svg>'+
+        '<span>'+t.label+'</span></button>';
+    }).join("");
+    Array.prototype.forEach.call(nav.querySelectorAll(".navbtn"), function(btn){
+      btn.addEventListener("click", function(){ setTab(btn.getAttribute("data-tab")); });
+    });
+  }
+
+  /* ================= saw-edge decoration ================= */
+  function sawEdgeSVG(){
+    return '<svg viewBox="0 0 400 16" preserveAspectRatio="none"><polygon points="0,0 400,0 400,16 380,4 360,16 340,4 320,16 300,4 280,16 260,4 240,16 220,4 200,16 180,4 160,16 140,4 120,16 100,4 80,16 60,4 40,16 20,4 0,16" fill="var(--accent)"/></svg>';
+  }
+
+  /* ================= views ================= */
+  function viewOverview(){
+    var impact = computeImpact();
+    var jobRows = [ { name:"Door", w:550, h:400, qty:2, minW:520, minH:380 } ];
+    var tryBlackbutt = packSheet(900, 600, expandPanels(jobRows,false), 3, false);
+    var trySpottedGum = packSheet(1200, 600, expandPanels(jobRows,false), 3, false);
+
+    var html = '';
+    html += '<div>';
+    html += '  <div class="hero-band">';
+    html += '    <div class="hero-top">';
+    html += '      <div><div class="eyebrow">Timber Offcut Exchange</div>';
+    html += '        <h1 class="hero-title">Offcut&#8209;to<br><span class="accent-word">Order</span></h1>';
+    html += '        <p class="hero-tag">Match one workshop&rsquo;s leftover timber to another workshop&rsquo;s next cutting job &mdash; before it goes to landfill.</p>';
+    html += '        <div class="hero-ctas">'+
+      '<button class="btn btn-hero-primary" id="heroPlanBtn">Plan a cut</button>'+
+      '<button class="btn btn-hero-ghost" id="heroListBtn">List an offcut</button>'+
+    '</div></div>';
+    html += '      <div class="pillar-card">Green Industrialization<span class="pdot">&#9679;</span>Zero Waste &amp; Methane</div>';
+    html += '    </div>';
+    html += '  </div>';
+    html += '  <div class="saw-edge">'+sawEdgeSVG()+'</div>';
+    html += '</div>';
+
+    html += '<div class="stat-bar">';
+    html += statCell("Offcuts listed", impact.totalListings, "", "");
+    html += statCell("Area matched", round2(impact.areaMatchedM2), "m&sup2;", "across all reservations");
+    html += statCell("Weight diverted", Math.round(impact.weightMatchedKg), "kg", impact.landfillDiverted+" listings were landfill-bound");
+    html += statCell("CO&#8322;e avoided", Math.round(impact.co2e), "kg", "see Impact tab", true);
+    html += '</div>';
+
+    html += '<div class="card pad demo-section">';
+    html += '  <div class="section-head"><h2>Same job. Two offcuts.</h2>'+
+      '<div style="font-family:\'IBM Plex Mono\',monospace; text-transform:uppercase; letter-spacing:0.03em; font-size:11px; color:var(--ink-faint); white-space:nowrap;">Job: 2 &times; 550 &times; 400 mm &middot; kerf 3 mm</div></div>';
+    html += '  <p style="color:var(--ink-soft); max-width:62ch; margin-top:6px;">This is the actual packing engine, not a mock-up. A buyer needs two 550&times;400mm door panels, 3mm kerf. The same job fails against one offcut in the marketplace and fits cleanly against another &mdash; which is exactly why a marketplace beats a single supplier.</p>';
+    html += '  <div class="demo-grid" style="margin-top:16px;">';
+    html += demoCard("Blackbutt", "900&times;600&times;25mm &middot; Merri Creek Cabinets, Coburg", tryBlackbutt);
+    html += demoCard("Spotted Gum", "1200&times;600&times;32mm &middot; Hollow Log Joinery, Brunswick", trySpottedGum);
+    html += '  </div>';
+    html += '  <div style="margin-top:16px; padding-top:14px; border-top:1px solid var(--border);">'+diagramLegend()+'</div>';
+    html += '  <div style="margin-top:16px;"><button class="btn btn-primary" id="openPlannerBtn">Open the full planner &rarr;</button></div>';
+    html += '</div>';
+
+    html += '<div>';
+    html += '  <div class="section-head"><h2>How it works</h2><div class="section-cut"></div></div>';
+    html += '  <div class="steps" style="margin-top:14px;">';
+    html += step("01","List","Log an offcut&rsquo;s species, size and condition in under a minute.",'<rect x="4" y="9" width="16" height="7" rx="1"/><path d="M12 7v10M8 12h8"/>');
+    html += step("02","Match &amp; adjust","Enter your panel list. We test it against nearby offcuts, kerf and rotation included.",'<rect x="4" y="5" width="16" height="14" rx="1"/><path d="M4 12h10" stroke-dasharray="2.5 2.5"/><path d="M14 9l4 3-4 3"/>');
+    html += step("03","Reserve","Hold the piece and arrange pick-up with the seller.",'<rect x="4" y="15" width="16" height="3"/><rect x="6" y="10" width="12" height="3"/><rect x="8" y="5" width="8" height="3"/>');
+    html += '  </div>';
+    html += '</div>';
+    return html;
+  }
+
+  function statCell(label, value, unit, note, flagScenario){
+    return '<div class="stat-cell'+(flagScenario?' scenario-cell':'')+'">'+
+      '<div class="stat-label">'+label+(flagScenario?' <span class="scenario-flag">scenario</span>':'')+'</div>'+
+      '<div class="stat-value mono">'+value+(unit?'<span class="stat-unit">'+unit+'</span>':'')+'</div>'+
+      (note?'<div class="stat-note">'+note+'</div>':'')+
+    '</div>';
+  }
+
+  function step(num,title,body,icon){
+    return '<div class="card step"><div class="step-top"><div class="step-num">'+num+'</div>'+
+      '<svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+icon+'</svg>'+
+      '</div><h4>'+title+'</h4><p>'+body+'</p></div>';
+  }
+
+  function stampBadge(success, placed, total){
+    var fraction = (typeof placed==="number" && typeof total==="number") ? (placed+'/'+total+' panels') : '';
+    return '<div class="stamp '+(success?'stamp-ok':'stamp-no')+'">'+
+      '<svg viewBox="0 0 100 100"><circle class="ring" cx="50" cy="50" r="46" stroke-width="4"/><circle class="ring" cx="50" cy="50" r="37" stroke-width="1.4" stroke-dasharray="3 4"/></svg>'+
+      '<div><span class="stamp-label">'+(success?"Fits":"No fit")+'</span>'+(fraction?'<span class="stamp-fraction">'+fraction+'</span>':'')+'</div>'+
+    '</div>';
+  }
+
+  function demoCard(title, subtitle, result){
+    var reason = result.success
+      ? "Both doors placed &middot; "+round1(result.usedArea/result.sheetArea*100)+"% yield, "+round2((result.sheetArea-result.usedArea)/1000000)+" m&sup2; waste."
+      : failureMessage(result);
+    return '<div class="card demo-card">'+
+      stampBadge(result.success, result.placements.length, result.panelCount)+
+      '<div class="demo-head"><h3>'+title+'</h3></div>'+
+      '<div class="demo-body">'+
+        '<div style="font-size:12px;color:var(--ink-faint);margin-bottom:6px;">'+subtitle+'</div>'+
+        '<div class="diagram-wrap">'+renderDiagramSVG(result,3)+'</div>'+
+        '<p class="demo-reason">'+reason+'</p>'+
+      '</div></div>';
+  }
+
+  function viewMarketplace(){
+    var q = marketplaceFilter.toLowerCase();
+    var listings = state.listings.filter(function(l){
+      return !q || (l.species+" "+l.seller+" "+l.location).toLowerCase().indexOf(q)>-1;
+    });
+    var html = '';
+    html += pageHead("Marketplace","Every offcut is measured to its largest clean rectangle. Reserve one, or test a cut plan against it first.");
+    html += '<div class="toolbar">';
+    html += '  <div class="field search-field"><input type="text" id="marketSearch" placeholder="Search species, workshop or suburb&hellip;" value="'+escapeHtml(marketplaceFilter)+'"></div>';
+    html += '  <button class="btn btn-primary btn-sm" id="gotoListBtn">+ List an offcut</button>';
+    html += '</div>';
+    html += '<div class="listing-grid">';
+    if(listings.length===0){ html += '<p style="color:var(--ink-faint);">No offcuts match that search.</p>'; }
+    listings.forEach(function(l){ html += listingCard(l); });
+    html += '</div>';
+    return html;
+  }
+
+  function statusChip(status){
+    if(status==="available") return '<span class="chip success">Available</span>';
+    if(status==="reserved") return '<span class="chip accent">Reserved</span>';
+    return '<span class="chip outline">Picked up</span>';
+  }
+
+  function listingCard(l){
+    var html = '<div class="tag-card"><div class="tag-hole"></div>';
+    html += '<div class="listing-top"><div><div class="listing-species">'+escapeHtml(l.species)+'</div><div class="listing-seller">'+escapeHtml(l.seller)+' &middot; '+escapeHtml(l.location)+'</div></div>'+statusChip(l.status)+'</div>';
+    html += '<div class="listing-dims">'+l.w+'&times;'+l.h+'<span> mm</span></div>';
+    html += '<div class="listing-meta">';
+    html += '<span class="chip outline">'+l.thickness+'mm thick</span>';
+    html += '<span class="chip outline">'+(l.condition==="clean"?"Clean &amp; dressed":l.condition==="reclaimed"?"Reclaimed":l.condition==="coated"?"Painted / coated":"Treated")+'</span>';
+    if(l.landfill) html += '<span class="chip danger">Otherwise landfill</span>';
+    html += '</div>';
+    html += '<div class="listing-note">'+escapeHtml(l.notes)+'</div>';
+    html += '<div class="listing-foot">';
+    if(l.status==="available"){
+      html += '<button class="btn btn-ghost btn-sm" data-plan-listing="'+l.id+'">Plan a cut with this &rarr;</button>';
+    } else if(l.status==="reserved"){
+      html += '<button class="btn btn-ghost btn-sm" data-pickup="'+l.id+'">Mark picked up</button>';
+    } else {
+      html += '<span class="field-hint">Reused'+(l.landfill?" &mdash; otherwise landfill-bound.":".")+'</span>';
+    }
+    html += '</div></div>';
+    return html;
+  }
+
+  var newListing = { seller:"", species:"", w:1200, h:600, thickness:18, density:600, location:"", condition:"clean", landfill:true, notes:"" };
+
+  function viewList(){
+    var html = '';
+    html += pageHead("List an offcut","Put a usable, clean offcut in front of other workshops before it goes to landfill.");
+    html += '<div class="card pad" style="max-width:640px;">';
+    html += '<form id="listForm" style="display:flex; flex-direction:column; gap:14px;">';
+    html += fieldRow([
+      field("lf_seller","Workshop / seller name","text", newListing.seller, true),
+      field("lf_location","Suburb / location","text", newListing.location, true)
+    ]);
+    html += '<div class="field"><label class="field-label" for="lf_species">Timber species</label>'+
+      '<input type="text" id="lf_species" list="speciesList" value="'+escapeHtml(newListing.species)+'" placeholder="e.g. Spotted Gum" required>'+
+      '<datalist id="speciesList">'+Object.keys(SPECIES_DENSITY).map(function(s){ return '<option value="'+s+'">'; }).join("")+'</datalist>'+
+      '<div class="field-hint">Density auto-fills for known species &mdash; feel free to override it.</div></div>';
+    html += fieldRow([
+      field("lf_w","Width (mm)","number", newListing.w, true),
+      field("lf_h","Height (mm)","number", newListing.h, true)
+    ]);
+    html += fieldRow([
+      field("lf_thickness","Thickness (mm)","number", newListing.thickness, true),
+      field("lf_density","Density (kg/m&sup3;)","number", newListing.density, true)
+    ]);
+    html += '<div class="field-hint" id="lf_estimate" style="margin-top:-6px;"></div>';
+    html += '<div class="field"><label class="field-label" for="lf_condition">Condition</label>'+
+      '<select id="lf_condition"><option value="clean"'+(newListing.condition==="clean"?" selected":"")+'>Clean &amp; dressed</option>'+
+      '<option value="reclaimed"'+(newListing.condition==="reclaimed"?" selected":"")+'>Reclaimed</option>'+
+      '<option value="coated"'+(newListing.condition==="coated"?" selected":"")+'>Painted / coated</option>'+
+      '<option value="treated"'+(newListing.condition==="treated"?" selected":"")+'>Treated</option></select></div>';
+    html += '<label class="checkrow"><input type="checkbox" id="lf_landfill" '+(newListing.landfill?"checked":"")+'> This would otherwise have gone to landfill or been burned as waste.</label>';
+    html += '<div class="field"><label class="field-label" for="lf_notes">Notes for buyers</label><textarea id="lf_notes" rows="2" placeholder="Edges, knots, offcut history&hellip;">'+escapeHtml(newListing.notes)+'</textarea></div>';
+    html += '<div><button type="submit" class="btn btn-primary">Add to marketplace</button></div>';
+    html += '</form></div>';
+    return html;
+  }
+
+  function field(id,label,type,value,required){
+    return '<div class="field"><label class="field-label" for="'+id+'">'+label+'</label>'+
+      '<input type="'+type+'" id="'+id+'" value="'+escapeHtml(value)+'" '+(required?"required":"")+(type==="number"?' min="0" step="any"':'')+'></div>';
+  }
+  function fieldRow(fields){ return '<div style="display:grid; grid-template-columns:repeat('+fields.length+',1fr); gap:12px;">'+fields.join("")+'</div>'; }
+  function pageHead(title, sub){
+    return '<div class="page-head"><div class="eyebrow">Offcut&#8209;to&#8209;Order</div><h2>'+title+'</h2><p>'+sub+'</p></div>';
+  }
+
+  function viewPlanner(){
+    syncSheetFromSource();
+    planner.attempts = planCut(planner.rows, planner.sheetW, planner.sheetH, state.assumptions.kerfMm, planner.allowRotate);
+    var available = state.listings.filter(function(l){ return l.status==="available" || l.id===planner.sourceId; });
+    var html = '';
+    html += pageHead("Plan a cut","Describe the panels you need. We test them against an offcut, kerf and rotation included.");
+    html += '<div class="planner-grid">';
+
+    // left: inputs
+    html += '<div style="display:flex; flex-direction:column; gap:16px;">';
+    html += '<div class="card pad">';
+    html += '<label class="field-label" for="pl_source">Offcut source</label>';
+    html += '<select id="pl_source">';
+    available.forEach(function(l){
+      html += '<option value="'+l.id+'" '+(planner.sourceId===l.id?"selected":"")+'>'+escapeHtml(l.seller)+' &mdash; '+escapeHtml(l.species)+' '+l.w+'&times;'+l.h+'mm'+(l.status!=="available"?" (reserved)":"")+'</option>';
+    });
+    html += '<option value="custom" '+(planner.sourceId==="custom"?"selected":"")+'>Custom offcut (enter dimensions)</option>';
+    html += '</select>';
+    if(planner.sourceId==="custom"){
+      html += '<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px;">'+
+        field("pl_customW","Width (mm)","number", planner.sheetW, true)+
+        field("pl_customH","Height (mm)","number", planner.sheetH, true)+
+      '</div>';
+    }
+    html += '<div style="margin-top:10px;">'+field("pl_kerf","Saw kerf (mm)","number", state.assumptions.kerfMm, true)+'</div>';
+    html += '<label class="checkrow" style="margin-top:10px;"><input type="checkbox" id="pl_rotate" '+(planner.allowRotate?"checked":"")+'> Allow rotating panels 90&deg; <span class="field-hint">(fine for sheet goods, avoid for directional grain)</span></label>';
+    html += '</div>';
+
+    html += '<div class="card pad">';
+    html += '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;"><label class="field-label" style="margin:0;">Requested panels (mm)</label><button class="btn btn-ghost btn-sm" id="addRowBtn">+ Add panel</button></div>';
+    html += '<div class="row-head-labels row-grid" style="margin-bottom:2px;">'+
+      '<span class="field-hint">Name</span><span class="field-hint">Width</span><span class="field-hint">Height</span><span class="field-hint">Qty</span><span class="field-hint">Min W</span><span class="field-hint">Min H</span><span></span></div>';
+    html += '<div class="panel-rows">';
+    planner.rows.forEach(function(row,i){
+      html += '<div class="panel-row-wrap row-grid" data-row="'+i+'">'+
+        '<input type="text" value="'+escapeHtml(row.name)+'" data-k="name">'+
+        '<input type="number" class="mono" min="0" step="any" value="'+row.w+'" data-k="w">'+
+        '<input type="number" class="mono" min="0" step="any" value="'+row.h+'" data-k="h">'+
+        '<input type="number" class="mono" min="1" step="1" value="'+row.qty+'" data-k="qty">'+
+        '<input type="number" class="mono" min="0" step="any" value="'+row.minW+'" data-k="minW">'+
+        '<input type="number" class="mono" min="0" step="any" value="'+row.minH+'" data-k="minH">'+
+        (planner.rows.length>1 ? '<button class="btn btn-ghost btn-sm" data-remove-row="'+i+'" title="Remove">&times;</button>' : '<span></span>')+
+      '</div>';
+    });
+    html += '</div>';
+    html += '<div class="field-hint" style="margin-top:8px;">Min W / Min H is the smallest size you&rsquo;d still accept, so the planner can trim a panel to fit. Recalculates as you edit &mdash; no &ldquo;run&rdquo; button.</div>';
+    html += '</div>';
+    html += '</div>';
+
+    // right: results (recalc() replaces just this container's contents)
+    html += '<div id="plannerResults" style="display:flex; flex-direction:column; gap:14px;">' + plannerResultsHTML() + '</div>';
+
+    html += '</div>'; // planner-grid
+    return html;
+  }
+
+  function plannerResultsHTML(){
+    var html = '';
+    if(planner.reservedNotice){
+      html += '<div class="banner success"><strong>Reserved.</strong>&nbsp;We&rsquo;ve marked this offcut as reserved with '+escapeHtml(planner.reservedNotice)+'. Pickup can be confirmed from the Marketplace once collected.</div>';
+    }
+    planner.attempts.forEach(function(att){
+      html += plannerResultCard(att);
+    });
+    var finalAttempt = planner.attempts[planner.attempts.length-1];
+    if(finalAttempt.result.success && planner.sourceId!=="custom" && !planner.reservedNotice){
+      var listing = activeListing();
+      if(listing && listing.status==="available"){
+        html += '<div class="card pad" style="display:flex; gap:10px; flex-wrap:wrap;"><button class="btn btn-primary" id="reserveBtn">Reserve this offcut with '+escapeHtml(listing.seller)+'</button></div>';
+      }
+    }
+    if(!finalAttempt.result.success){
+      var triedAdjusted = planner.attempts.length>1;
+      html += '<div class="banner danger">'+(triedAdjusted
+        ? 'No arrangement of these panels &mdash; even at the buyer&rsquo;s minimum sizes &mdash; fits this offcut.'
+        : 'This doesn&rsquo;t fit the offcut, and you haven&rsquo;t given any room to adjust (minimums match the exact ask).')+
+        ' Try a larger offcut, fewer panels, or a wider tolerance.</div>';
+      html += '<div class="card pad" style="display:flex; gap:10px; flex-wrap:wrap;"><button class="btn btn-ghost btn-sm" id="browseOtherBtn">Browse other offcuts &rarr;</button></div>';
+    }
+    return html;
+  }
+
+  function plannerResultCard(att){
+    var r = att.result;
+    var title = att.mode==="requested" ? "Attempt 1 &middot; buyer's exact ask" : "Attempt 2 &middot; adjusted to buyer's minimums";
+    var html = '<div class="card result-card">';
+    html += stampBadge(r.success, r.placements.length, r.panelCount);
+    html += '<div class="result-head"><h4>'+title+'</h4></div>';
+    html += '<div class="diagram-wrap">'+renderDiagramSVG(r, state.assumptions.kerfMm)+'</div>';
+    html += diagramLegend();
+    if(r.success){
+      html += '<div class="waste-stat">Yield '+round1(r.usedArea/r.sheetArea*100)+'% &middot; '+round2((r.sheetArea-r.usedArea)/1000000)+' m&sup2; waste.</div>';
+    } else {
+      html += '<p class="demo-reason">'+failureMessage(r)+'</p>';
+    }
+    html += '</div>';
+    return html;
+  }
+
+  function viewImpact(){
+    var impact = computeImpact();
+    var html = '';
+    html += pageHead("Impact","What this prototype would report to the judges &mdash; and what it deliberately doesn't claim.");
+    html += '<div class="stat-bar">';
+    html += statCell("Offcuts listed", impact.totalListings, "", "");
+    html += statCell("Area matched", round2(impact.areaMatchedM2), "m&sup2;", "sum of all reservations");
+    html += statCell("Weight diverted", Math.round(impact.weightMatchedKg), "kg", "reserved, pending or complete");
+    html += statCell("Weight reused", Math.round(impact.weightReusedKg), "kg", "pickup confirmed only");
+    html += '</div>';
+
+    html += '<div class="card pad">';
+    html += '<h3 style="font-size:16px; font-family:\'Oswald\'; text-transform:uppercase; letter-spacing:0.02em; font-weight:700;">Scenario CO&#8322;e avoided <span class="chip outline" style="font-size:9.5px; padding:1px 6px;">editable assumptions</span></h3>';
+    html += '<div class="stat-value mono" style="font-size:34px; margin:8px 0;">'+Math.round(impact.co2e)+'<span class="stat-unit">kg CO&#8322;e</span></div>';
+    html += '<p class="field-hint" style="margin-bottom:12px;">Formula: (weight matched &times; emissions factor) &minus; (reservations &times; transport/cutting overhead). This is an illustrative scenario, not a measured saving &mdash; replace the factor below with a cited source before presenting.</p>';
+    html += '<div class="assumptions-grid">';
+    html += '<div class="field"><label class="field-label" for="co2Factor">Emissions factor (kg CO&#8322;e per kg new timber)</label><input type="number" class="mono" id="co2Factor" min="0" step="0.01" value="'+state.assumptions.co2Factor+'"></div>';
+    html += '<div class="field"><label class="field-label" for="transportFactor">Transport / cutting overhead (kg CO&#8322;e per transfer)</label><input type="number" class="mono" id="transportFactor" min="0" step="0.1" value="'+state.assumptions.transportFactor+'"></div>';
+    html += '<div class="field" style="grid-column:1/-1;"><label class="field-label" for="co2Source">Source citation</label><input type="text" id="co2Source" placeholder="e.g. an EPD, NGA factor, or supplier figure &mdash; add before presenting" value="'+escapeHtml(state.assumptions.co2Source)+'"></div>';
+    html += '</div></div>';
+
+    html += '<div class="banner info"><strong style="white-space:nowrap;">On methane:</strong>&nbsp;we don&rsquo;t publish a methane figure. That needs disposal-pathway data &mdash; landfill cell conditions, gas capture &mdash; that this prototype doesn&rsquo;t have. Instead we report landfill-bound volume diverted ('+impact.landfillDiverted+' listings so far) as an honest proxy for the Zero Waste &amp; Methane Reduction priority.</div>';
+
+    html += '<div>';
+    html += '<div class="section-head"><h2 style="font-size:20px;">Reservations</h2><div class="section-cut"></div></div>';
+    html += '<div class="card table-wrap" style="margin-top:10px;"><table class="simple"><thead><tr><th>Date</th><th>Species</th><th>Area</th><th>Weight</th><th>Status</th><th></th></tr></thead><tbody>';
+    if(state.reservations.length===0){ html += '<tr><td colspan="6" style="color:var(--ink-faint);">No reservations yet.</td></tr>'; }
+    state.reservations.slice().reverse().forEach(function(r){
+      var d = new Date(r.timestamp);
+      html += '<tr><td class="mono">'+d.toLocaleDateString()+'</td><td>'+escapeHtml(r.species)+'</td><td class="mono">'+round2(r.areaMm2/1000000)+' m&sup2;</td><td class="mono">'+round1(r.weightKg)+' kg</td><td>'+(r.pickedUp?'<span class="chip outline">Picked up</span>':'<span class="chip accent">Reserved</span>')+'</td><td>'+(!r.pickedUp?'<button class="btn btn-ghost btn-sm" data-pickup="'+r.listingId+'">Mark picked up</button>':'')+'</td></tr>';
+    });
+    html += '</tbody></table></div>';
+    html += '</div>';
+    return html;
+  }
+
+  /* ================= render + bindings ================= */
+  var marketplaceFilter = "";
+
+  function render(){
+    renderNav();
+    var app = document.getElementById("app");
+    var html = '<section data-panel="'+activeTab+'">';
+    if(activeTab==="overview") html += viewOverview();
+    else if(activeTab==="marketplace") html += viewMarketplace();
+    else if(activeTab==="list") html += viewList();
+    else if(activeTab==="planner") html += viewPlanner();
+    else if(activeTab==="impact") html += viewImpact();
+    html += '</section>';
+    app.innerHTML = html;
+    bind();
+  }
+
+  function bind(){
+    var openPlannerBtn = document.getElementById("openPlannerBtn");
+    if(openPlannerBtn) openPlannerBtn.addEventListener("click", function(){ setTab("planner"); });
+    var heroPlanBtn = document.getElementById("heroPlanBtn");
+    if(heroPlanBtn) heroPlanBtn.addEventListener("click", function(){ setTab("planner"); });
+    var heroListBtn = document.getElementById("heroListBtn");
+    if(heroListBtn) heroListBtn.addEventListener("click", function(){ setTab("list"); });
+
+    var gotoListBtn = document.getElementById("gotoListBtn");
+    if(gotoListBtn) gotoListBtn.addEventListener("click", function(){ setTab("list"); });
+
+    var marketSearch = document.getElementById("marketSearch");
+    if(marketSearch) marketSearch.addEventListener("input", function(){ marketplaceFilter = marketSearch.value; render(); marketSearch_focus(); });
+
+    Array.prototype.forEach.call(document.querySelectorAll("[data-plan-listing]"), function(btn){
+      btn.addEventListener("click", function(){
+        planner.sourceId = btn.getAttribute("data-plan-listing");
+        planner.attempts = null; planner.reservedNotice = null;
+        syncSheetFromSource();
+        setTab("planner");
+      });
+    });
+
+    Array.prototype.forEach.call(document.querySelectorAll("[data-pickup]"), function(btn){
+      btn.addEventListener("click", function(){ markPickedUp(btn.getAttribute("data-pickup")); });
+    });
+
+    var listForm = document.getElementById("listForm");
+    if(listForm) listForm.addEventListener("submit", function(e){
+      e.preventDefault();
+      var l = {
+        id: uid("L"),
+        seller: val("lf_seller"), species: val("lf_species"),
+        w: num("lf_w"), h: num("lf_h"), thickness: num("lf_thickness"), density: num("lf_density"),
+        location: val("lf_location"), condition: val("lf_condition"),
+        landfill: document.getElementById("lf_landfill").checked,
+        status: "available", notes: val("lf_notes")
+      };
+      state.listings.unshift(l);
+      save();
+      newListing = { seller:"", species:"", w:100, h:50, thickness:18, density:480, location:"", condition:"clean", landfill:true, notes:"" };
+      setTab("marketplace");
+    });
+    var speciesInput = document.getElementById("lf_species");
+    if(speciesInput) speciesInput.addEventListener("change", function(){
+      var d = SPECIES_DENSITY[speciesInput.value];
+      if(d){ var df = document.getElementById("lf_density"); if(df) df.value = d; updateListEstimate(); }
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("#lf_w,#lf_h,#lf_thickness,#lf_density"), function(inp){
+      inp.addEventListener("input", updateListEstimate);
+    });
+    updateListEstimate();
+
+    var plSource = document.getElementById("pl_source");
+    if(plSource) plSource.addEventListener("change", function(){
+      planner.sourceId = plSource.value; planner.reservedNotice=null;
+      syncSheetFromSource(); render();
+    });
+    var plRotate = document.getElementById("pl_rotate");
+    if(plRotate) plRotate.addEventListener("change", function(){ planner.allowRotate = plRotate.checked; recalc(); });
+    var plKerf = document.getElementById("pl_kerf");
+    if(plKerf) plKerf.addEventListener("input", function(){ state.assumptions.kerfMm = parseFloat(plKerf.value)||0; save(); debouncedRecalc(); });
+    var plCustomW = document.getElementById("pl_customW");
+    if(plCustomW) plCustomW.addEventListener("input", function(){ planner.sheetW = parseFloat(plCustomW.value)||0; debouncedRecalc(); });
+    var plCustomH = document.getElementById("pl_customH");
+    if(plCustomH) plCustomH.addEventListener("input", function(){ planner.sheetH = parseFloat(plCustomH.value)||0; debouncedRecalc(); });
+
+    var addRowBtn = document.getElementById("addRowBtn");
+    if(addRowBtn) addRowBtn.addEventListener("click", function(){
+      planner.rows.push({ name:"Panel", w:300, h:300, qty:1, minW:300, minH:300 }); render();
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("[data-remove-row]"), function(btn){
+      btn.addEventListener("click", function(){ planner.rows.splice(parseInt(btn.getAttribute("data-remove-row"),10),1); render(); });
+    });
+    Array.prototype.forEach.call(document.querySelectorAll(".panel-row-wrap"), function(wrap){
+      var idx = parseInt(wrap.getAttribute("data-row"),10);
+      Array.prototype.forEach.call(wrap.querySelectorAll("input"), function(inp){
+        inp.addEventListener("input", function(){
+          var k = inp.getAttribute("data-k");
+          planner.rows[idx][k] = (k==="name") ? inp.value : (parseFloat(inp.value)||0);
+          debouncedRecalc();
+        });
+      });
+    });
+
+    bindResultsButtons();
+
+    var co2Factor = document.getElementById("co2Factor");
+    if(co2Factor) co2Factor.addEventListener("input", function(){ state.assumptions.co2Factor = parseFloat(co2Factor.value)||0; save(); render(); });
+    var transportFactor = document.getElementById("transportFactor");
+    if(transportFactor) transportFactor.addEventListener("input", function(){ state.assumptions.transportFactor = parseFloat(transportFactor.value)||0; save(); render(); });
+    var co2Source = document.getElementById("co2Source");
+    if(co2Source) co2Source.addEventListener("input", function(){ state.assumptions.co2Source = co2Source.value; save(); });
+  }
+
+  function val(id){ var e=document.getElementById(id); return e?e.value:""; }
+  function num(id){ return parseFloat(val(id))||0; }
+  function updateListEstimate(){
+    var el = document.getElementById("lf_estimate");
+    if(!el) return;
+    var w=num("lf_w"), h=num("lf_h"), t=num("lf_thickness"), d=num("lf_density");
+    var areaM2 = (w*h)/1000000;
+    var weightKg = areaM2*(t/1000)*d;
+    el.textContent = (areaM2>0 ? "Est. weight " + round1(weightKg) + " kg · area " + round2(areaM2) + " m²" : "");
+  }
+  function marketSearch_focus(){ var e=document.getElementById("marketSearch"); if(e){ e.focus(); var l=e.value.length; e.setSelectionRange(l,l); } }
+
+  render();
+})();
+</script>
+</body>
+</html>
