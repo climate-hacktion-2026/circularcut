@@ -40,9 +40,9 @@ Links: [Event hub](https://hackjunction.app/hackathons/climate-hack-tion) ·
 |---|---|---|
 | Kai | [@KaiCryan](https://github.com/KaiCryan) | |
 | Shah Noor Mostafa | [@shahnoormostafa-coder](https://github.com/shahnoormostafa-coder) | |
-| | | |
+| | [@jayceemaimia-debug](https://github.com/jayceemaimia-debug) | |
 
-Teams need **3–5 members** — this roster needs at least one more person before registration.
+Teams need **3–5 members**. Org/repo invite sent to @jayceemaimia-debug — pending acceptance.
 
 ## Project
 
