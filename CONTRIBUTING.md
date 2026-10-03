@@ -31,8 +31,6 @@ fixes after that are fine; new functionality is not.
 
 ## Note on branding
 
-The EarthSync logo used in the original scaffold repo was designed before kickoff.
-It is **not** included here yet. If/when we add it, log it as a line in
-`docs/DISCLOSURES.md` (what it is, that it predates the event) rather than treating
-the clean history here as making that question moot — a fresh repo fixes the
-commit-timestamp problem, it doesn't change when the asset was actually made.
+The EarthSync logo used in the original scaffold repo was designed before kickoff
+and is intentionally not used here. The current logo (`assets/offcut-*.svg`) was
+generated fresh during the event window — see `docs/DISCLOSURES.md` for the entry.

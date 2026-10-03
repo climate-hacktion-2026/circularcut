@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/offcut-lockup.svg" alt="Offcut-to-Order" width="420"></p>
+
 # EarthSync — Offcut-to-Order
 
 Team repo for [Climate Hack-tion](https://hackjunction.app/hackathons/climate-hack-tion) — Build for 2035, 2–4 October 2026.
