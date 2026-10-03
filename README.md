@@ -9,7 +9,7 @@ workshop's next cutting job, with a real kerf-aware cut-plan calculator — not 
 a listing board.
 
 **🔗 [Live demo](https://climate-hacktion-2026.github.io/offcut-to-order/)** — served
-from the `feat/offcut-to-order-prototype` branch until [PR #1](https://github.com/climate-hacktion-2026/offcut-to-order/pull/1)
+from the `feat/offcut-to-order-prototype` branch until [PR #2](https://github.com/climate-hacktion-2026/offcut-to-order/pull/2)
 is reviewed and merged into `main`.
 
 ## Event basics
