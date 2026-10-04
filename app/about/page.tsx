@@ -10,13 +10,15 @@ const team = [
     contribution: 'Timber Yard design system, product design and cutting-plan UI.',
     github: 'https://github.com/KaiCryan',
     photo: '/team/kai.jpg',
+    degree: null,
   },
   {
-    name: 'Shah Noor Mostafa',
+    name: 'Shah',
     role: 'Engineering',
     contribution: 'Cutting-plan engine and shared exchange backend.',
     github: 'https://github.com/shahnoormostafa-coder',
     photo: '/team/shah.jpg',
+    degree: 'Bachelor of Information Technology (Cybersecurity & BIS)',
   },
   {
     name: 'Jaycee',
@@ -24,6 +26,7 @@ const team = [
     contribution: null,
     github: 'https://github.com/jayceemaimia-debug',
     photo: '/team/jaycee.jpg',
+    degree: 'International Relations & Political Science · Victoria University of Wellington',
   },
   {
     name: 'Tasfia',
@@ -31,6 +34,7 @@ const team = [
     contribution: null,
     github: 'https://github.com/tasfiadija1',
     photo: null,
+    degree: 'Bachelor of Computer Engineering (Software) · University of Sydney',
   },
   {
     name: 'Shelly',
@@ -38,6 +42,7 @@ const team = [
     contribution: null,
     github: 'https://github.com/ui-ue',
     photo: '/team/shelly.jpg',
+    degree: 'Bachelor of Engineering/Science (Honours) · Macquarie University',
   },
 ];
 
@@ -160,7 +165,7 @@ export default function Page() {
                 <div className="about-person-copy">
                   <h3>{member.name}</h3>
                   <span className="about-person-role">{member.role}</span>
-                  <span className="about-placeholder">[Degree · University placeholder]</span>
+                  <span className="about-placeholder">{member.degree ?? '[Degree · University placeholder]'}</span>
                 </div>
                 {member.contribution && <p className="about-contribution">{member.contribution}</p>}
                 <div className="about-person-links">
