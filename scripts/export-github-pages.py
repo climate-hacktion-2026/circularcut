@@ -16,7 +16,8 @@ ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
 BASE = "/offcut-to-order"
 REPO_URL = "https://github.com/climate-hacktion-2026/offcut-to-order"
-SERVER = "http://127.0.0.1:8787"
+APP_URL = "https://offcut-to-order-circularcut-demo.earthsync-circularcut-demo.workers.dev"
+SERVER = "http://127.0.0.1:8788"
 
 
 def fetch(path: str) -> str:
@@ -44,7 +45,7 @@ def rewrite_links(markup: str) -> str:
         name, quote, value = match.group(1), match.group(2), match.group(3)
         if name.lower() == "href":
             if value == "/app":
-                value = "#pages-demo-note"
+                value = APP_URL + "/app"
             elif value == "/":
                 value = BASE + "/"
             elif value == "/about":
@@ -136,7 +137,8 @@ def main() -> None:
         content = rewrite_links(content)
         content += (
             '<aside id="pages-demo-note" class="pages-demo-note"><div class="site-wrap">'
-            '<span>The interactive CircularCut app is not hosted on GitHub Pages; this is a static preview of the landing and About pages.</span>'
+            '<span>The interactive CircularCut app is hosted separately from these static GitHub Pages previews.</span>'
+            f'<a href="{APP_URL}/app" target="_blank" rel="noreferrer">Open the demo ↗</a>'
             f'<a href="{REPO_URL}" target="_blank" rel="noreferrer">Project source ↗</a>'
             '</div></aside>'
         )
