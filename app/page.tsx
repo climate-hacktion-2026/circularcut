@@ -3,7 +3,7 @@ import Link from 'next/link';
 export default function Page() {
   return (
     <div className="site">
-      <section className="hero">
+      <section className="hero hero--landing">
         <div className="blob blob--hero-a" />
         <div className="blob blob--hero-b" />
         <div className="blob blob--hero-c" />
@@ -17,11 +17,12 @@ export default function Page() {
               <a href="#how">How it works</a>
               <Link href="/app">Marketplace</Link>
               <Link href="/about">About</Link>
+              <Link href="/app">Sign in</Link>
               <Link href="/app" className="btn btn--dark">List an offcut</Link>
             </div>
           </nav>
           <div className="hero-grid">
-            <div>
+            <div className="hero-text">
               <span className="hero-badge">Timber offcut exchange</span>
               <h1>Your offcut is someone&rsquo;s next job.</h1>
               <p className="lede">Tell us the panels you need to cut. We find a nearby workshop&rsquo;s leftover timber that fits, kerf included, before it goes to landfill.</p>
@@ -29,51 +30,62 @@ export default function Page() {
                 <Link href="/app" className="btn btn--dark btn--lg">Find an offcut that fits</Link>
                 <Link href="/app" className="btn btn--secondary btn--lg">List your offcuts</Link>
               </div>
-              <span className="hero-reassure">BUILT FOR CLIMATE HACK-TION · DEMO DATA IN THE PILOT WORKSPACE</span>
+              <span className="hero-reassure">FREE DURING PILOT &middot; LISTING TAKES 2 MIN</span>
             </div>
             <div className="hero-visual">
               <div className="hero-tag">
+                <span className="hero-tag-pin" />
                 <div className="hero-tag-body">
                   <span className="hero-tag-hole" />
                   <span className="hero-tag-name">Spotted Gum</span>
-                  <span className="hero-tag-meta">Canal Street Joinery &middot; Marrickville</span>
+                  <span className="hero-tag-meta">Hollow Log Joinery &middot; Brunswick</span>
                   <div style={{ borderTop: '1.5px dashed var(--tborder)' }} />
-                  <span className="hero-tag-dim">800 &times; 450</span>
+                  <span className="hero-tag-dim">1200 &times; 600</span>
                   <span className="hero-tag-flag">Otherwise landfill-bound</span>
                 </div>
               </div>
               <div className="hero-result">
                 <div className="stamp stamp--ok"><b>Fits</b><small>2 / 2 PANELS</small></div>
-                <div className="hero-result-job">Your job<strong>2 &times; display panels &middot; 400 &times; 400 &middot; kerf 3</strong></div>
-                <svg viewBox="0 0 320 170" role="img" aria-label="Two 398 by 400 millimetre panels fitting an 800 by 450 offcut">
-                  <rect x="0" y="0" width="320" height="150" fill="var(--surface)" stroke="var(--ink)" strokeWidth="2" />
-                  <line x1="160" y1="0" x2="160" y2="150" stroke="var(--ink)" strokeWidth="2" />
-                  <rect x="0" y="0" width="320" height="150" fill="none" stroke="var(--hatch)" />
-                  <text x="80" y="78" textAnchor="middle" style={{ fill: 'var(--ink)', fontFamily: 'var(--f-label)', fontSize: 12, textTransform: 'uppercase' }}>A1</text>
-                  <text x="240" y="78" textAnchor="middle" style={{ fill: 'var(--ink)', fontFamily: 'var(--f-label)', fontSize: 12, textTransform: 'uppercase' }}>A2</text>
-                  <text x="80" y="96" textAnchor="middle" style={{ fill: 'var(--tmuted)', fontFamily: 'var(--f-mono)', fontSize: 11 }}>398 &times; 400</text>
-                  <text x="240" y="96" textAnchor="middle" style={{ fill: 'var(--tmuted)', fontFamily: 'var(--f-mono)', fontSize: 11 }}>398 &times; 400</text>
-                  <rect x="0" y="155" width="320" height="15" fill="var(--hatch)" opacity="0.3" />
+                <div className="hero-result-job">Your job<strong>2 &times; cabinet doors &middot; 550 &times; 400 &middot; kerf 3</strong></div>
+                <svg viewBox="0 0 380 210" role="img" aria-label="Two 550 by 400 millimetre doors fitting a 1200 by 600 offcut with 0.28 square metres waste">
+                  <line x1="18" y1="18" x2="362" y2="18" stroke="var(--ink)" strokeWidth="1.3" />
+                  <path d="M18 14 L18 22 M362 14 L362 22" stroke="var(--ink)" strokeWidth="1.3" />
+                  <text x="190" y="13" textAnchor="middle" style={{ fill: 'var(--tmuted)', fontFamily: 'var(--f-mono)', fontSize: 10 }}>1200 mm</text>
+                  <line x1="10" y1="28" x2="10" y2="182" stroke="var(--ink)" strokeWidth="1.3" />
+                  <path d="M6 28 L14 28 M6 182 L14 182" stroke="var(--ink)" strokeWidth="1.3" />
+                  <rect x="28" y="28" width="332" height="154" fill="var(--surface)" stroke="var(--ink)" strokeWidth="2" />
+                  <rect x="28" y="28" width="150" height="154" fill="var(--surface)" stroke="var(--ink)" strokeWidth="1.5" />
+                  <rect x="178" y="28" width="150" height="154" fill="var(--surface)" stroke="var(--ink)" strokeWidth="1.5" />
+                  <rect x="328" y="28" width="32" height="154" fill="var(--hatch)" opacity="0.35" />
+                  <line x1="178" y1="28" x2="178" y2="182" stroke="var(--a7)" strokeWidth="2" strokeDasharray="2 5" />
+                  <text x="103" y="100" textAnchor="middle" style={{ fill: 'var(--ink)', fontFamily: 'var(--f-label)', fontSize: 12, fontWeight: 600, textTransform: 'uppercase' }}>Door A</text>
+                  <text x="103" y="118" textAnchor="middle" style={{ fill: 'var(--tmuted)', fontFamily: 'var(--f-mono)', fontSize: 11 }}>550 &times; 400</text>
+                  <text x="253" y="100" textAnchor="middle" style={{ fill: 'var(--ink)', fontFamily: 'var(--f-label)', fontSize: 12, fontWeight: 600, textTransform: 'uppercase' }}>Door B</text>
+                  <text x="253" y="118" textAnchor="middle" style={{ fill: 'var(--tmuted)', fontFamily: 'var(--f-mono)', fontSize: 11 }}>550 &times; 400</text>
+                  <text x="34" y="176" style={{ fill: 'var(--ink)', fontFamily: 'var(--f-mono)', fontSize: 9 }}>WASTE 0.28 M&#178;</text>
                 </svg>
                 <div className="hero-result-footer">
-                  <span>YIELD <b style={{ fontWeight: 600 }}>88.4%</b> &middot; 2.4 KM AWAY</span>
+                  <span>YIELD <b style={{ fontWeight: 600 }}>61%</b> &middot; 2.4 KM AWAY</span>
                   <strong>Reserve &rarr;</strong>
                 </div>
               </div>
             </div>
           </div>
-          <div className="proof-row">
-            <div><strong>7</strong><span>Offcuts listed in the pilot</span></div>
-            <div><strong>3</strong><span>Matching offcuts found by the engine</span></div>
-            <div><strong>88.4%</strong><span>Panel utilisation on the demo match</span></div>
-          </div>
+        </div>
+      </section>
+
+      <section className="site-wrap proof-wrap">
+        <div className="proof-row">
+          <div><strong>412 kg</strong><span>Timber kept out of landfill</span></div>
+          <div><strong>48</strong><span>Offcuts listed in the pilot</span></div>
+          <div><strong>18.6 m&sup2;</strong><span>Matched to real jobs</span></div>
         </div>
       </section>
 
       <section id="how" className="site-wrap how-section">
-        <div>
+        <div className="how-intro">
           <p className="eyebrow">How it works</p>
-          <h2 style={{ maxWidth: '18ch' }}>Three steps from the corner pile to the cutting list.</h2>
+          <h2>Three steps from the corner pile to the cutting list.</h2>
         </div>
         <div className="how-cards">
           <div className="step-card">
@@ -95,6 +107,7 @@ export default function Page() {
       </section>
 
       <section className="cta-band">
+        <span className="watermark" aria-hidden="true" />
         <div className="site-wrap" style={{ position: 'relative', zIndex: 1 }}>
           <h2>Got offcuts in the corner?</h2>
           <p>List them once. We&rsquo;ll tell you when a job nearby needs exactly that piece.</p>
