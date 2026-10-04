@@ -67,7 +67,7 @@ def copy_assets(css: str) -> str:
     fonts_src = ROOT / "dist/client/_next/static/_vinext_fonts"
     for font in fonts_src.rglob("*.woff2"):
         shutil.copy2(font, fonts_out / font.name)
-    for rel in ("favicon.svg", "hero-wave.svg", "logo"):
+    for rel in ("favicon.svg", "hero-wave.svg", "logo", "team"):
         src = ROOT / "dist/client" / rel
         dest = DOCS / rel
         if src.is_dir():
