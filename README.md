@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/offcut-lockup-dark.svg?v=2">
-    <img src="assets/offcut-lockup.svg?v=2" alt="CircularCut" width="420">
+    <source media="(prefers-color-scheme: dark)" srcset="assets/circularcut-lockup-dark.svg">
+    <img src="assets/circularcut-lockup.svg" alt="CircularCut" width="420">
   </picture>
 </p>
 
