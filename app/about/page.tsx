@@ -41,7 +41,7 @@ const team = [
     github: 'https://github.com/tasfiadija1',
     linkedin: null,
     portfolio: null,
-    photo: '/team/tasfia.jpg',
+    photo: '/team/tasfia.png',
     degree: 'Bachelor of Computer Engineering (Software) · University of Sydney',
   },
   {

@@ -453,7 +453,6 @@ svg{flex-shrink:0}
 .about-photo-placeholder{align-self:center;width:min(156px,100%);aspect-ratio:1;border-radius:62% 38% 46% 54%/55% 48% 52% 45%;overflow:hidden;background:var(--bg);border:2px dashed var(--hatch);display:flex;align-items:center;justify-content:center;text-align:center;color:var(--tmuted);font:500 12px/1.4 var(--f-label);text-transform:uppercase;letter-spacing:.1em}
 .about-photo-placeholder:has(img){border-style:solid}
 .about-photo-placeholder img{width:100%;height:100%;object-fit:cover}
-.about-person:nth-child(4) .about-photo-placeholder img{width:225%;height:225%;max-width:none;transform:translate(12%,27%)}
 .about-person:nth-child(2) .about-photo-placeholder{border-radius:44% 56% 58% 42%/52% 44% 56% 48%}
 .about-person:nth-child(3) .about-photo-placeholder{border-radius:56% 44% 40% 60%/46% 58% 42% 54%}
 .about-person-copy{display:flex;flex-direction:column;gap:6px}
