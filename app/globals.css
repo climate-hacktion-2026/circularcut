@@ -91,6 +91,11 @@ svg{flex-shrink:0}
 .nav-item[data-state=active]{background:var(--accent)!important;color:var(--ink)!important;font-weight:600;transform:rotate(-1.2deg);box-shadow:0 3px 0 var(--shadow-deep)}
 .nav-count{margin-left:auto;font-family:var(--f-mono);font-size:11px;background:color-mix(in srgb,var(--bg) 18%,transparent);min-width:18px;padding:1px 5px;line-height:16px;border-radius:4px;text-align:center}
 .nav-item[data-state=active] .nav-count{background:var(--ink);color:var(--accent)}
+.nav-divider{display:flex;align-items:center;gap:8px;margin:10px 4px 2px;font-family:var(--f-label);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:color-mix(in srgb,var(--bg) 45%,transparent)}
+.nav-divider::after{content:"";flex:1;border-top:1.5px dashed color-mix(in srgb,var(--bg) 25%,transparent)}
+.nav-item--secondary{height:36px;font-size:12px;letter-spacing:.06em;color:color-mix(in srgb,var(--bg) 70%,transparent)}
+.nav-item--secondary:hover{color:var(--bg)}
+.nav-item--secondary[data-state=active]{transform:rotate(-1deg)}
 .sidebar-foot{margin-top:auto;padding:14px;border:1.5px dashed color-mix(in srgb,var(--bg) 35%,transparent);border-radius:var(--r-inner);display:flex;flex-direction:column;gap:10px}
 .sidebar-foot .demo-pill{display:flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:11px;color:var(--bg)}
 .sidebar-foot [data-slot=button][data-variant=ghost]{color:var(--bg);text-decoration:none;justify-content:flex-start;padding:0}
