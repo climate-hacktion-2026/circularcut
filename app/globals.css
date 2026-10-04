@@ -431,12 +431,14 @@ svg{flex-shrink:0}
 .about-hero-copy h1{margin:0;font-size:clamp(56px,7vw,112px);line-height:.88;max-width:10ch;text-wrap:balance}
 .about-hero-copy .lede{margin:0;max-width:480px}
 .about-hero-copy .hero-ctas{margin-top:0}
-.about-competition-wrap{position:relative;justify-self:center;width:min(100%,460px);padding-top:16px;filter:drop-shadow(0 4px 0 var(--ink))}
-.about-competition-card{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:16px;padding:40px;background:var(--surface);border-radius:var(--r-tag);transform:rotate(3deg)}
+.about-competition-wrap{position:relative;justify-self:center;width:min(100%,500px);padding:16px 10px 10px 0;filter:drop-shadow(0 5px 0 var(--ink))}
+.about-competition-card{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:16px;min-height:350px;padding:40px 42px 44px;background:var(--surface);border-radius:var(--r-tag);transform:rotate(3deg)}
 .about-competition-card .hero-tag-hole{position:absolute;top:24px;left:24px;width:16px;height:16px}
 .about-card-eyebrow{padding-left:30px;font-family:var(--f-label);font-size:13px;letter-spacing:.14em;text-transform:uppercase}
-.about-competition-card strong{font-family:var(--f-display);font-size:clamp(38px,4.8vw,52px);line-height:.95;text-transform:uppercase}
+.about-competition-card strong{font-family:var(--f-display);font-size:clamp(40px,4.4vw,54px);line-height:.88;text-transform:uppercase;white-space:nowrap}
 .about-rule{width:100%;border-top:1.5px dashed var(--tborder)}
+.hero-tag-pill{display:inline-flex;align-items:center;min-height:32px;padding:4px 14px;border:1.5px solid var(--ink);border-radius:var(--r-pill);font-family:var(--f-label);font-size:12px;font-weight:600;line-height:1.2;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.hero-tag-pill--fill{background:var(--accent);border-color:var(--accent)}
 .about-placeholder{font-family:var(--f-mono);font-size:11px;color:var(--tmuted)}
 .about-string{position:absolute;top:-10px;left:31px;width:2px;height:58px;background:var(--ink);transform:rotate(-24deg);transform-origin:bottom;z-index:1}
 .about-team-section{max-width:1320px;margin:0 auto;padding:96px 64px 120px;display:flex;flex-direction:column;gap:56px}
@@ -451,6 +453,7 @@ svg{flex-shrink:0}
 .about-photo-placeholder{align-self:center;width:min(156px,100%);aspect-ratio:1;border-radius:62% 38% 46% 54%/55% 48% 52% 45%;overflow:hidden;background:var(--bg);border:2px dashed var(--hatch);display:flex;align-items:center;justify-content:center;text-align:center;color:var(--tmuted);font:500 12px/1.4 var(--f-label);text-transform:uppercase;letter-spacing:.1em}
 .about-photo-placeholder:has(img){border-style:solid}
 .about-photo-placeholder img{width:100%;height:100%;object-fit:cover}
+.about-person:nth-child(4) .about-photo-placeholder img{width:225%;height:225%;max-width:none;transform:translate(12%,27%)}
 .about-person:nth-child(2) .about-photo-placeholder{border-radius:44% 56% 58% 42%/52% 44% 56% 48%}
 .about-person:nth-child(3) .about-photo-placeholder{border-radius:56% 44% 40% 60%/46% 58% 42% 54%}
 .about-person-copy{display:flex;flex-direction:column;gap:6px}

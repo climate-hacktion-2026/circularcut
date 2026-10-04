@@ -17,7 +17,6 @@ export default function Page() {
               <a href="#how">How it works</a>
               <Link href="/app?tab=materials">Marketplace</Link>
               <Link href="/about">About</Link>
-              <Link href="/app">Sign in</Link>
               <Link href="/app?tab=materials" className="btn btn--dark">List an offcut</Link>
             </div>
           </nav>

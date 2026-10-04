@@ -7,7 +7,7 @@ const team = [
   {
     name: 'Kai',
     role: 'Product design & prototype development',
-    contribution: 'Timber Yard design system, product design and cutting-plan UI.',
+    contribution: null,
     github: 'https://github.com/KaiCryan',
     linkedin: 'https://www.linkedin.com/in/kaicryan/',
     portfolio: 'https://kaicryan.dev/',
@@ -17,7 +17,7 @@ const team = [
   {
     name: 'Shah',
     role: 'Prototype engineering & video narration',
-    contribution: 'Cutting-plan engine and shared exchange backend.',
+    contribution: null,
     github: 'https://github.com/shahnoormostafa-coder',
     linkedin: 'https://www.linkedin.com/in/shah-noor-mostafa-bhuiyan-a42b8134a/',
     portfolio: null,
@@ -123,7 +123,6 @@ export default function Page() {
               <Link href="/#how">How it works</Link>
               <Link href="/app?tab=materials">Marketplace</Link>
               <Link href="/about" aria-current="page">About</Link>
-              <Link href="/app">Sign in</Link>
               <Link href="/app?tab=materials" className="btn btn--dark">List an offcut</Link>
             </div>
           </nav>
@@ -142,7 +141,7 @@ export default function Page() {
               <div className="about-competition-card">
                 <span className="hero-tag-hole" />
                 <span className="about-card-eyebrow">Entered in</span>
-                <strong>Climate Hack-tion 2026</strong>
+                <strong>Climate Hack-tion<br />2026</strong>
                 <span className="about-rule" />
                 <span className="hero-tag-pill">Green Industrialization</span>
                 <span className="hero-tag-pill hero-tag-pill--fill">Zero Waste &amp; Methane Reduction</span>
