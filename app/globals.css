@@ -352,8 +352,8 @@ svg{flex-shrink:0}
 .hero-nav-links a:not(.btn):hover{text-decoration-line:underline;text-decoration-style:dashed;text-decoration-color:var(--ink);text-decoration-thickness:3px;text-underline-offset:6px}
 .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,460px);gap:56px;align-items:center;padding:52px 0 24px}
 /* Landing-only scale and overlap; About keeps its compact hero. */
-.hero--landing{padding-bottom:128px}
-.hero--landing .hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,520px);gap:64px;padding:100px 0 72px}
+.hero--landing{padding-bottom:168px}
+.hero--landing .hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,520px);gap:64px;padding:148px 0 108px;min-height:600px}
 .hero--landing h1{font-size:clamp(64px,8.4vw,128px);line-height:.88;max-width:11ch}
 .hero--landing .hero-visual{position:relative;justify-self:end;width:100%;max-width:520px;padding-top:124px}
 .hero--landing .hero-tag{position:absolute;top:0;left:18px;z-index:2;width:min(270px,78%);margin:0;transform:rotate(-5deg)}
