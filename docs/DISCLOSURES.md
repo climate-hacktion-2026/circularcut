@@ -47,6 +47,8 @@ current submission's real stack; update again if anything changes before close.
 | Anton, Oswald, Public Sans, IBM Plex Mono | Google Fonts, loaded via `next/font/google` | Open Font License |
 | Offcut-to-Order logo (`assets/offcut-*.svg`, `public/logo/`) | AI-generated via Claude Design, 3 Oct 2026 | Original work, team-owned |
 | `shadcn-tailwind-4.13.0.css` (`source/vendor/`) | shadcn/ui generated theme layer | MIT, see `vendor/shadcn-tailwind-4.13.0.LICENSE.md` |
+| About page team photos (`public/team/kai.jpg`, `shah.jpg`, `jaycee.jpg`) | Team members' own photos | Original, team-owned |
+| About page placeholder photo (`public/team/shelly.jpg`) | "Laughing Kookaburra - male.jpg" by Peter Firminger, via Wikimedia Commons, cropped | CC BY 2.0 |
 
 ## Note
 

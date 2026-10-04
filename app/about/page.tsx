@@ -9,30 +9,35 @@ const team = [
     role: 'Design & build',
     contribution: 'Timber Yard design system, product design and cutting-plan UI.',
     github: 'https://github.com/KaiCryan',
+    photo: '/team/kai.jpg',
   },
   {
     name: 'Shah Noor Mostafa',
     role: 'Engineering',
     contribution: 'Cutting-plan engine and shared exchange backend.',
     github: 'https://github.com/shahnoormostafa-coder',
+    photo: '/team/shah.jpg',
   },
   {
     name: 'Jaycee',
     role: 'Role pending',
     contribution: null,
     github: 'https://github.com/jayceemaimia-debug',
+    photo: '/team/jaycee.jpg',
   },
   {
     name: 'Tasfia',
     role: 'Role pending',
     contribution: null,
     github: 'https://github.com/tasfiadija1',
+    photo: null,
   },
   {
     name: 'Shelly',
     role: 'Role pending',
     contribution: null,
     github: 'https://github.com/ui-ue',
+    photo: '/team/shelly.jpg',
   },
 ];
 
@@ -143,9 +148,15 @@ export default function Page() {
             <article className="about-person" key={member.name}>
               <div className="about-team-card">
                 <span className="about-card-hole" />
-                <div className="about-photo-placeholder" role="img" aria-label={`Photo placeholder for ${member.name}`}>
-                  <span>Photo<br />placeholder</span>
-                </div>
+                {member.photo ? (
+                  <div className="about-photo-placeholder">
+                    <img src={member.photo} alt={member.name} width={480} height={480} />
+                  </div>
+                ) : (
+                  <div className="about-photo-placeholder" role="img" aria-label={`Photo placeholder for ${member.name}`}>
+                    <span>Photo<br />placeholder</span>
+                  </div>
+                )}
                 <div className="about-person-copy">
                   <h3>{member.name}</h3>
                   <span className="about-person-role">{member.role}</span>
