@@ -19,7 +19,7 @@ function Choice({value,label,options,onChange}:{value:string;label:string;option
 export function ExchangeBar({data,busy,onOpen,onRefresh}:{data:Workshop;busy:boolean;onOpen:()=>void;onRefresh:()=>void}){
  if(!data.exchange)return null;
  const unread=(data.notifications??[]).filter(n=>!n.read).length;
- return <div className="exchange-bar"><div><Users size={17}/><strong>{data.exchange.name}</strong><span className="tiny-tag">{data.exchange.shared?'Shared exchange':'Personal workshop'}</span><span>{data.exchange.shared?data.exchange.memberCount+' '+(data.exchange.memberCount===1?'member':'members'):data.profile?.name}</span></div><div><Button variant="ghost" size="sm" onClick={onOpen}><Bell size={15}/>{unread?unread+' unread updates':'Exchange & updates'}</Button><Button variant="ghost" size="sm" aria-label="Refresh exchange" disabled={busy} onClick={onRefresh}><RefreshCw size={15}/></Button></div></div>;
+ return <div className="exchange-bar"><div><Users size={17}/><strong>{data.exchange.name}</strong><span className="tiny-tag">{data.exchange.shared?'Shared exchange':'Only visible to you'}</span>{data.exchange.shared&&<span>{data.exchange.memberCount+' '+(data.exchange.memberCount===1?'member':'members')}</span>}</div><div><Button variant="ghost" size="sm" onClick={onOpen}><Bell size={15}/>{unread?unread+' unread updates':'Exchange & updates'}</Button><Button variant="ghost" size="sm" aria-label="Refresh exchange" disabled={busy} onClick={onRefresh}><RefreshCw size={15}/></Button></div></div>;
 }
 export function ExchangePanel({data,busy,mutate,onOpenRecord}:{data:Workshop;busy:boolean;mutate:Mutate;onOpenRecord:(id:string)=>void}){
  const [profile,setProfile]=useState<WorkshopProfile>({name:'',suburb:'',contact:''});
