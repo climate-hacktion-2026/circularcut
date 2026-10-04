@@ -9,9 +9,9 @@ export default function Page() {
         <div className="blob blob--hero-c" />
         <div className="site-wrap">
           <nav className="hero-nav">
-            <Link href="/" aria-label="Offcut-to-Order home" style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none', color: 'var(--ink)' }}>
+            <Link href="/" aria-label="CircularCut home" style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none', color: 'var(--ink)' }}>
               <img src="/logo/offcut-mark.svg" alt="" width={40} height={40} style={{ display: 'block' }} />
-              <span style={{ fontFamily: 'var(--f-display)', textTransform: 'uppercase', fontSize: 22, letterSpacing: '-.005em' }}>Offcut-to-Order</span>
+              <span style={{ fontFamily: 'var(--f-display)', textTransform: 'uppercase', fontSize: 22, letterSpacing: '-.005em' }}>CircularCut</span>
             </Link>
             <div className="hero-nav-links">
               <a href="#how">How it works</a>
@@ -113,7 +113,7 @@ export default function Page() {
           <p>List them once. We&rsquo;ll tell you when a job nearby needs exactly that piece.</p>
           <Link href="/app?tab=materials" className="btn btn--primary btn--lg">List an offcut</Link>
           <div className="cta-footline">
-            <span>OFFCUT-TO-ORDER &middot; BUILT FOR GREEN INDUSTRIALIZATION &amp; ZERO WASTE</span>
+            <span>CIRCULARCUT &middot; BUILT FOR GREEN INDUSTRIALIZATION &amp; ZERO WASTE</span>
             <span>CO&#8322;e FIGURES ARE SCENARIO ESTIMATES &middot; NO METHANE CLAIMS</span>
           </div>
         </div>

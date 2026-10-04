@@ -115,9 +115,9 @@ export default function Page() {
         <div className="blob blob--hero-c" />
         <div className="site-wrap">
           <nav className="hero-nav" aria-label="Main navigation">
-            <Link href="/" aria-label="Offcut-to-Order home" className="about-brand">
+            <Link href="/" aria-label="CircularCut home" className="about-brand">
               <img src="/logo/offcut-mark.svg" alt="" width={44} height={44} />
-              <span>Offcut-to-Order</span>
+              <span>CircularCut</span>
             </Link>
             <div className="hero-nav-links">
               <Link href="/#how">How it works</Link>
@@ -131,7 +131,7 @@ export default function Page() {
             <div className="about-hero-copy">
               <span className="hero-badge">About the team</span>
               <h1>The people behind the offcuts.</h1>
-              <p className="lede">Offcut-to-Order is a student entry for Climate Hack-tion 2026. Here&rsquo;s who built it, and how to reach us.</p>
+              <p className="lede">CircularCut is a student entry for Climate Hack-tion 2026. Here&rsquo;s who built it, and how to reach us.</p>
               <div className="hero-ctas">
                 <a href="#contact" className="btn btn--dark btn--lg">Contact us</a>
                 <a href="#feedback" className="btn btn--secondary btn--lg">Leave feedback</a>
@@ -221,7 +221,7 @@ export default function Page() {
         <div className="site-wrap about-footer-inner">
           <div className="about-footer-brand">
             <img src="/logo/offcut-mark-lime.svg" alt="" width={48} height={48} />
-            <span>Offcut-to-Order</span>
+            <span>CircularCut</span>
           </div>
           <div className="about-footer-disclosure">
             <span>A STUDENT PROJECT · CLIMATE HACK-TION 2026</span>
