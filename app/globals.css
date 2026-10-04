@@ -76,7 +76,7 @@ svg{flex-shrink:0}
 [data-slot=card]{background:var(--surface)!important;border:1.5px solid var(--tborder)!important;border-radius:var(--r-card)!important;box-shadow:0 3px 0 var(--tborder)!important}
 
 /* ---------- app shell: 240px dark sidebar + main ---------- */
-.app{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:100vh;background:var(--bg);max-width:1800px;margin:auto}
+.app{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:100vh;width:100%;background:var(--bg)}
 .sidebar{background:var(--ink);color:var(--bg);padding:28px 18px;display:flex;flex-direction:column;gap:22px;position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--bg)}
 .brand-mark{flex:none;width:44px;height:44px;display:block}
