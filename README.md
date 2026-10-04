@@ -16,6 +16,7 @@ and a record of completed reuse.
 **GitHub Pages preview:** https://climate-hacktion-2026.github.io/circularcut/ — static landing and About pages.
 **Interactive demo:** https://offcut-to-order-circularcut-demo.earthsync-circularcut-demo.workers.dev/app — Cloudflare Workers + D1; anonymous cookie-based workspaces contain demo data that visitors can change.
 **Final competition video:** [Watch or download the CircularCut final demo](submission/CircularCut-Final-Demo.mp4).
+**Final presentation:** [View the CircularCut presentation deck](submission/CircularCut-Presentation-Final.pdf).
 
 ## Event basics
 
