@@ -1,11 +1,11 @@
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/offcut-lockup-dark.svg?v=2">
-    <img src="assets/offcut-lockup.svg?v=2" alt="Offcut-to-Order" width="420">
+    <img src="assets/offcut-lockup.svg?v=2" alt="CircularCut" width="420">
   </picture>
 </p>
 
-# EarthSync — Offcut-to-Order
+# EarthSync — CircularCut
 
 Team repo for [Climate Hack-tion](https://hackjunction.app/hackathons/climate-hack-tion) — Build for 2035, 2–4 October 2026.
 

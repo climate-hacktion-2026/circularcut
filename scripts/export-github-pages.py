@@ -147,8 +147,8 @@ def main() -> None:
             + (f' class="{escape(html_class, quote=True)}"' if html_class else "")
             + '><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
             + f'<style data-vinext-fonts>{fonts}</style>'
-            '<title>Offcut-to-Order — EarthSync</title>'
-            '<meta name="description" content="Offcut-to-Order matches workshop orders with reusable timber offcuts.">'
+            '<title>CircularCut — EarthSync</title>'
+            '<meta name="description" content="CircularCut matches workshop orders with reusable timber offcuts.">'
             f'<link rel="icon" type="image/svg+xml" href="{BASE}/favicon.svg">'
             f'<link rel="stylesheet" href="{BASE}/assets/{css_filename}">'
             '</head><body'

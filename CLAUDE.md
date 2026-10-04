@@ -1,8 +1,8 @@
-# CLAUDE.md — Offcut-to-Order design rules
+# CLAUDE.md — CircularCut design rules
 
 Put this file at the repo root. It's binding for every page and component you build.
 
-The look is called **Timber Yard / Organic**: a workshop tool with a forest-green and lime palette. It pairs industrial stencil type and precise technical drawings with soft, organic shapes. The reference prototype is `reference/Offcut-to-Order Organic.dc.html`; open it in a browser. All tokens and component classes are in `offcut.css`. Import that file and use it. Don't restyle from scratch.
+The look is called **Timber Yard / Organic**: a workshop tool with a forest-green and lime palette. It pairs industrial stencil type and precise technical drawings with soft, organic shapes. The reference prototype is `reference/CircularCut Organic.dc.html`; open it in a browser. All tokens and component classes are in `offcut.css`. Import that file and use it. Don't restyle from scratch.
 
 ## Hard rules
 1. **Colours come only from `offcut.css` variables.** Never hard-code a hex value. Lime `--accent` is the ONLY accent. Use it as a fill (hero band, primary button, active nav, landfill tag, kerf line) and put `--text` ink on top. Never set lime text on a light background. For green text on light backgrounds use `--a7`. Use `--ok` and `--bad` only for fit, status and validation.
@@ -55,7 +55,7 @@ The look is called **Timber Yard / Organic**: a workshop tool with a forest-gree
 11. **Contrast:** body text ≥ 4.5:1. Use `--muted` for secondary text and never go lighter. Text on lime is always `--text`.
 
 ## Marketing pages
-The landing page (`reference/Offcut-to-Order Landing.dc.html`) is the model for every public page.
+The landing page (`reference/CircularCut Landing.dc.html`) is the model for every public page.
 - No sidebar. A fluid layout with max width 1320px and 64px side padding.
 - A lime hero with a wavy edge, one strong Anton headline, a lede of 480px or less, at most 2 CTAs, and one product visual (a tag plus a diagram and stamp). Never a stock photo.
 - Public pages so far: Landing and About & contact. Share one nav (How it works · Marketplace · About · Sign in · List an offcut) and one dark footer band.
@@ -80,7 +80,7 @@ The mark is one solid shape: a 12-tooth saw blade with hooked, seed-head teeth, 
 - **Primary mark** (`offcut-mark.svg`): lime blade on a hand-drawn forest-green blob. The default wherever the mark stands alone, e.g. the sidebar brand spot, which replaces the old ring stamp. Use `offcut-mark-lime.svg` on dark-green surfaces.
 - **Single colour** (`offcut-mark-mono.svg`, currentColor): the bare blade. `-mono-ink` for light grounds, `-mono-white` for dark ones. Use it for print and on lime.
 - **Tile** (`offcut-tile.svg`, `favicon.svg`): 64-unit square with rx 16. Favicon, avatar, and anything under 24px. `offcut-tile-lime.svg` is the inverse.
-- **Lockup** (`offcut-lockup*.svg`): mark plus OFFCUT-TO-ORDER in Anton, uppercase, tracking −0.005em, gap 0.2× the mark height. On dark or lime grounds, use the bare blade with no blob. In the app, rebuild it as an inline SVG plus live Anton text. The SVG files need the Anton webfont; outline the text before print.
+- **Lockup** (`offcut-lockup*.svg`): mark plus CIRCULARCUT in Anton, uppercase, tracking −0.005em, gap 0.2× the mark height. On dark or lime grounds, use the bare blade with no blob. In the app, rebuild it as an inline SVG plus live Anton text. The SVG files need the Anton webfont; outline the text before print.
 - Minimum sizes: mark 24px, lockup 28px mark height, tile 16px. Clear space is at least the hub diameter on every side.
 - Never outline the blade, use a perfect circle for the container, sharpen the teeth, or recolour outside forest, lime and white.
 - Favicon: `<link rel="icon" type="image/svg+xml" href="/favicon.svg">`

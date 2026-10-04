@@ -35,7 +35,7 @@ current submission's real stack; update again if anything changes before close.
 | Tool | Used for |
 |---|---|
 | Claude (Claude Code) | Restyled the CircularCut app (globals.css, shell/nav layout, component markup) to the Timber Yard/Organic design system; cut-diagram recolouring; this disclosures update |
-| Claude (claude.ai Design) | Earlier visual-design wireframe exploration and the Offcut-to-Order logo/mark, generated during the event window |
+| Claude (claude.ai Design) | Earlier visual-design wireframe exploration and the CircularCut logo/mark, generated during the event window |
 | OpenAI ChatGPT app-building platform ("site creator" / Vinext starter) | Shah's original CircularCut build: project scaffold, cutting-plan engine, exchange/reservation backend, ChatGPT sign-in integration (`app/chatgpt-auth.ts`), Cloudflare D1 hosting config (`.openai/hosting.json`) |
 
 **Needs confirming with Shah before submission:** the exact OpenAI product/tool name and how much of the original app logic (vs. scaffold) was AI-generated through it, so this line is precise rather than inferred from the repo's config files.
@@ -45,7 +45,7 @@ current submission's real stack; update again if anything changes before close.
 | Item | Source | License |
 |---|---|---|
 | Anton, Oswald, Public Sans, IBM Plex Mono | Google Fonts, loaded via `next/font/google` | Open Font License |
-| Offcut-to-Order logo (`assets/offcut-*.svg`, `public/logo/`) | AI-generated via Claude Design, 3 Oct 2026 | Original work, team-owned |
+| CircularCut logo (`assets/offcut-*.svg`, `public/logo/`) | AI-generated via Claude Design, 3 Oct 2026 | Original work, team-owned |
 | `shadcn-tailwind-4.13.0.css` (`source/vendor/`) | shadcn/ui generated theme layer | MIT, see `vendor/shadcn-tailwind-4.13.0.LICENSE.md` |
 | About page team photos (`public/team/kai.jpg`, `shah.jpg`, `jaycee.jpg`) | Team members' own photos | Original, team-owned |
 | About page placeholder photo (`public/team/shelly.jpg`) | "Laughing Kookaburra - male.jpg" by Peter Firminger, via Wikimedia Commons, cropped | CC BY 2.0 |

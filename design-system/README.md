@@ -1,10 +1,10 @@
-# Handoff: Offcut-to-Order — "Timber Yard / Organic" design language
+# Handoff: CircularCut — "Timber Yard / Organic" design language
 
 ## Overview
-Offcut-to-Order is a B2B web marketplace that matches one workshop's leftover timber offcuts to another workshop's next cutting job. It was built for a climate hackathon (Green Industrialization; Zero Waste & Methane Reduction). This package carries the visual language, so new pages built in Claude Code look and feel identical to the prototype.
+CircularCut is a B2B web marketplace that matches one workshop's leftover timber offcuts to another workshop's next cutting job. It was built for a climate hackathon (Green Industrialization; Zero Waste & Methane Reduction). This package carries the visual language, so new pages built in Claude Code look and feel identical to the prototype.
 
 ## About the design files
-`reference/Offcut-to-Order Organic.dc.html` is a **design reference built in HTML**: a prototype of the intended look, not production code. Open it in a browser (keep `support.js` next to it).
+`reference/CircularCut Organic.dc.html` is a **design reference built in HTML**: a prototype of the intended look, not production code. Open it in a browser (keep `support.js` next to it).
 
 Recreate the designs in the target codebase's stack, e.g. React/Next, Vue or Svelte. If there is no stack yet, choose one; Next.js + plain CSS is suggested. Use **`offcut.css`** as the real stylesheet: its tokens and classes were extracted 1:1 from the prototype.
 
@@ -16,12 +16,12 @@ Recreate the designs in the target codebase's stack, e.g. React/Next, Vue or Sve
 - `offcut.css`: design tokens plus the component layer (shell, buttons, cards, fields, tags, stamps, hanging tags, diagrams, blobs, hero).
 - `icons.svg`: the tool-glyph icon sprite (square, planks, clipboard, saw blade, tape measure, search).
 - `wave-edge.js`: generator for the wavy hero edge (`clip-path`).
-- `reference/Offcut-to-Order Organic.dc.html` + `support.js`: the 5-screen prototype (frames 1a–1e).
+- `reference/CircularCut Organic.dc.html` + `support.js`: the 5-screen prototype (frames 1a–1e).
 - `logo/`: "seed blade" brand mark (full colour, single colour, tile/favicon, horizontal lockup) as SVG. Rules are in CLAUDE.md §Logo; the visual sheet is `screenshots/06-logo-sheet.png`.
 - `screenshots/00-landing.png`, `07-about-contact.png`: public pages.
 - `screenshots/01-overview.png` … `05-impact.png`: full-length 1440px captures of each screen, for visual comparison. Dashed green sticky notes in the captures are design annotations; don't ship them.
 
-## Landing page (`reference/Offcut-to-Order Landing.dc.html`, `screenshots/00-landing.png`)
+## Landing page (`reference/CircularCut Landing.dc.html`, `screenshots/00-landing.png`)
 The public marketing page is fluid (max content width 1320px, side padding 64px) and has no sidebar. It has four sections only; keep it that simple.
 1. **Hero:** lime band with a wavy bottom edge and three translucent blobs.
    - Top nav: logo + wordmark, 3 text links, and a dark "List an offcut" button.
@@ -34,7 +34,7 @@ The public marketing page is fluid (max content width 1320px, side padding 64px)
 
 **Whitespace rule:** give the space to what carries meaning. That means the headline/lede/CTA stack, the gutter between hero text and visual, the diagram card's padding, and step-card copy. Keep nav, proof row and footer tight.
 
-## About & contact page (`reference/Offcut-to-Order About.dc.html`, `screenshots/07-about-contact.png`)
+## About & contact page (`reference/CircularCut About.dc.html`, `screenshots/07-about-contact.png`)
 This page uses the same shell as the landing page: lime hero with wavy edge, then content, then a dark footer band.
 1. **Hero:** stamp eyebrow, H1 "The people behind the offcuts.", lede, and two CTAs (Contact us → #contact, Leave feedback → #feedback). On the right, a tilted hanging tag shows the competition, its two category tags, and the university.
 2. **Team:** a grid of `.hang` cards (`auto-fit, minmax(228px,1fr)`). Each card has a photo in an organic blob mask, name (Anton 28), role (Oswald, `--a7`), degree · university (mono), a one-line contribution, a dashed rule, and pill links (LinkedIn ↗ / GitHub ↗ / Email ↗). Tilts alternate.
