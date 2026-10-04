@@ -355,7 +355,7 @@ svg{flex-shrink:0}
 .hero--landing{padding-bottom:168px}
 .hero--landing .hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,520px);gap:64px;padding:148px 0 108px;min-height:600px}
 .hero--landing h1{font-size:clamp(64px,8.4vw,128px);line-height:.88;max-width:11ch}
-.hero--landing .hero-visual{position:relative;justify-self:end;width:100%;max-width:520px;padding-top:124px}
+.hero--landing .hero-visual{position:relative;justify-self:end;width:100%;max-width:520px;padding-top:196px}
 .hero--landing .hero-tag{position:absolute;top:0;left:18px;z-index:2;width:min(270px,78%);margin:0;transform:rotate(-5deg)}
 .hero--landing .hero-tag-pin{position:absolute;top:-30px;left:27px;z-index:0;width:2px;height:56px;background:var(--ink);transform:rotate(-24deg);transform-origin:bottom}
 .hero--landing .hero-tag-body{position:relative;z-index:1;padding:20px 22px}
@@ -411,6 +411,7 @@ svg{flex-shrink:0}
 .btn--lg{height:56px;padding:0 28px;font-size:16px}
 .btn--primary{background:var(--accent);color:var(--ink);box-shadow:0 4px 0 var(--ink)}
 .btn--dark{background:var(--ink);color:var(--surface);box-shadow:0 4px 0 var(--shadow-deep)}
+.btn--dark:hover{color:var(--surface)}
 .btn--secondary{background:var(--surface);color:var(--ink);box-shadow:0 4px 0 var(--ink)}
 .btn--ghost{background:transparent;border-color:transparent;box-shadow:none;text-decoration:underline dashed;text-underline-offset:5px}
 /* Public-page controls share the same physical button treatment. */
