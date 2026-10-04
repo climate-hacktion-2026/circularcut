@@ -6,41 +6,51 @@ import Link from 'next/link';
 const team = [
   {
     name: 'Kai',
-    role: 'Design & build',
+    role: 'Product design & prototype development',
     contribution: 'Timber Yard design system, product design and cutting-plan UI.',
     github: 'https://github.com/KaiCryan',
+    linkedin: null,
+    portfolio: null,
     photo: '/team/kai.jpg',
-    degree: null,
+    degree: 'Bachelor of Information Technology, majoring in Software Technology · Macquarie University',
   },
   {
     name: 'Shah',
-    role: 'Engineering',
+    role: 'Prototype engineering & video narration',
     contribution: 'Cutting-plan engine and shared exchange backend.',
     github: 'https://github.com/shahnoormostafa-coder',
+    linkedin: 'https://www.linkedin.com/in/shah-noor-mostafa-bhuiyan-a42b8134a/',
+    portfolio: null,
     photo: '/team/shah.jpg',
-    degree: 'Bachelor of Information Technology (Cybersecurity & BIS)',
+    degree: 'Bachelor of Information Technology (Cybersecurity & BIS) · Macquarie University',
   },
   {
     name: 'Jaycee',
-    role: 'Role pending',
+    role: 'Project description & prototype ideation',
     contribution: null,
     github: 'https://github.com/jayceemaimia-debug',
+    linkedin: 'https://www.linkedin.com/in/mai-phuong-le19102006/',
+    portfolio: null,
     photo: '/team/jaycee.jpg',
     degree: 'International Relations & Political Science · Victoria University of Wellington',
   },
   {
     name: 'Tasfia',
-    role: 'Role pending',
+    role: 'Punchline & prototype support',
     contribution: null,
     github: 'https://github.com/tasfiadija1',
+    linkedin: null,
+    portfolio: null,
     photo: null,
     degree: 'Bachelor of Computer Engineering (Software) · University of Sydney',
   },
   {
     name: 'Shelly',
-    role: 'Role pending',
+    role: 'Presentation design & prototype ideation',
     contribution: null,
     github: 'https://github.com/ui-ue',
+    linkedin: 'https://www.linkedin.com/in/shell3y/',
+    portfolio: null,
     photo: '/team/shelly.jpg',
     degree: 'Bachelor of Engineering/Science (Honours) · Macquarie University',
   },
@@ -111,10 +121,10 @@ export default function Page() {
             </Link>
             <div className="hero-nav-links">
               <Link href="/#how">How it works</Link>
-              <Link href="/app">Marketplace</Link>
+              <Link href="/app?tab=materials">Marketplace</Link>
               <Link href="/about" aria-current="page">About</Link>
               <Link href="/app">Sign in</Link>
-              <Link href="/app" className="btn btn--dark">List an offcut</Link>
+              <Link href="/app?tab=materials" className="btn btn--dark">List an offcut</Link>
             </div>
           </nav>
           <div className="hero-grid about-hero-grid">
@@ -170,6 +180,8 @@ export default function Page() {
                 {member.contribution && <p className="about-contribution">{member.contribution}</p>}
                 <div className="about-person-links">
                   <a className="about-profile-link" href={member.github} target="_blank" rel="noreferrer">GitHub ↗</a>
+                  {member.linkedin && <a className="about-profile-link" href={member.linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a>}
+                  {member.portfolio && <a className="about-profile-link" href={member.portfolio} target="_blank" rel="noreferrer">Portfolio ↗</a>}
                 </div>
               </div>
               <span className="about-person-string" />
