@@ -478,14 +478,14 @@ svg{flex-shrink:0}
 .about-feedback-form .role-pill{height:40px;padding:0 16px;white-space:nowrap}
 .about-feedback-form .rating-row{display:flex;gap:8px}
 .about-feedback-form .rating-dot{width:46px;height:46px;border-radius:50%;font:600 16px var(--f-mono);color:var(--ink);background:var(--surface)}
-.about-feedback-form .rating-dot:nth-child(1){border-radius:46% 54% 50% 50%}
-.about-feedback-form .rating-dot:nth-child(2){border-radius:54% 46% 48% 52%}
-.about-feedback-form .rating-dot:nth-child(3){border-radius:50% 50% 56% 44%}
-.about-feedback-form .rating-dot:nth-child(4){border-radius:48% 52% 44% 56%}
-.about-feedback-form .rating-dot:nth-child(5){border-radius:52% 48% 50% 50%}
-.about-feedback-form .rating-dot[aria-pressed=true],.about-feedback-form .role-pill[aria-pressed=true]{background:var(--accent)}
+
+
+
+
+
+.about-feedback-form .rating-dot[aria-pressed=true]{background:var(--accent);border:2px solid var(--ink);border-radius:50%;box-shadow:none;transform:none}.about-feedback-form .role-pill[aria-pressed=true]{background:var(--accent)}
 .about-form-label{display:flex;flex-direction:column;gap:12px}
-.about-form-label textarea,.about-form-label input{width:100%;border:1.5px solid var(--tborder);background:var(--surface);border-radius:var(--r-inner);padding:14px 18px;color:var(--ink);font:400 15px/1.55 var(--f-body)}
+.about-form-label textarea,.about-form-label input{width:100%;border:1.5px solid var(--tborder);background:var(--surface);border-radius:var(--r-pill);padding:14px 18px;color:var(--ink);font:400 15px/1.55 var(--f-body)}
 .about-form-label input{height:48px;border-radius:var(--r-pill)}
 .about-form-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .about-form-actions .mono{font-size:11px;color:var(--tmuted)}
