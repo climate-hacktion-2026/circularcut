@@ -348,7 +348,7 @@ svg{flex-shrink:0}
 .hero{position:relative;overflow:hidden;isolation:isolate;background:var(--accent);color:var(--ink);padding-bottom:84px;clip-path:none;}.hero::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:44px;background:var(--bg);-webkit-mask-image:url("/hero-wave.svg");mask-image:url("/hero-wave.svg");-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-size:100% 100%;mask-size:100% 100%;pointer-events:none;z-index:2}
 .hero-nav{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;padding:28px 0}
 .hero-nav-links{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
-.hero-nav-links a:not(.btn){font-family:var(--f-label);font-size:13px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink);text-decoration:none}
+.hero-nav-links a:not(.btn){font-family:var(--f-label);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--ink);text-decoration:none}
 .hero-nav-links a:not(.btn):hover{text-decoration:underline dashed;text-underline-offset:6px}
 .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,460px);gap:56px;align-items:center;padding:52px 0 24px}
 /* Landing-only scale and overlap; About keeps its compact hero. */
@@ -423,7 +423,7 @@ svg{flex-shrink:0}
 /* About page reconstructed from the public wireframe. */
 .about-brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);font-family:var(--f-display);font-size:22px;text-transform:uppercase;letter-spacing:-.005em}
 .about-brand img{display:block;flex:none}
-.about-page .hero-nav-links a[aria-current=page]{text-decoration:underline dashed;text-underline-offset:6px}
+.hero-nav-links a[aria-current=page]{font-weight:700;text-decoration:underline dashed;text-decoration-thickness:2px;text-underline-offset:7px}
 .about-hero{padding-bottom:104px}
 .about-hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,380px);gap:64px;padding:56px 0 52px}
 .about-hero-copy{display:flex;flex-direction:column;align-items:flex-start;gap:28px;min-width:0}
