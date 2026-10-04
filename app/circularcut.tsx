@@ -24,9 +24,11 @@ function Num({label,value,onChange,min=0,max=5000,step=1}:{label:string;value:nu
 function Status({value}:{value:string}){return <span className={'status status-'+value}>{value==='reused'?'Reuse recorded':value.charAt(0).toUpperCase()+value.slice(1)}</span>;}
 function usedArea(r:Reservation){return r.plan.placements.filter(p=>r.usedIds.includes(p.id)).reduce((a,p)=>a+p.w*p.h,0);}
 function saveFile(name:string,text:string,type:string){const u=URL.createObjectURL(new Blob([text],{type}));const a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),5000);}
+const validTabs=['workbench','materials','evidence','activity','exchange','pilot'];
+function initialTab(){if(typeof window==='undefined')return 'workbench';const t=new URLSearchParams(window.location.search).get('tab');return t&&validTabs.includes(t)?t:'workbench';}
 
 export default function CircularCut(){
- const [tab,setTab]=useState('workbench'),[order,setOrder]=useState<Order>(structuredClone(sampleOrder));
+ const [tab,setTab]=useState(initialTab),[order,setOrder]=useState<Order>(structuredClone(sampleOrder));
  const [data,setData]=useState<Workshop>({stocks:sampleStocks,reservations:[]}),[ready,setReady]=useState(false),[error,setError]=useState(''),[busy,setBusy]=useState(false);
  const [selectedId,setSelectedId]=useState('OC-001'),[showSettings,setShowSettings]=useState(false),[showRejected,setShowRejected]=useState(false);
  const [reservationOpen,setReservationOpen]=useState(false),[approved,setApproved]=useState(false),[addOpen,setAddOpen]=useState(false),[resetOpen,setResetOpen]=useState(false),[cancelId,setCancelId]=useState<string|null>(null);
@@ -58,7 +60,7 @@ export default function CircularCut(){
 
  return <><Tabs value={tab} onValueChange={setTab} orientation="vertical"><div className="app">
  <aside className="sidebar">
- <a className="brand" href="/" aria-label="CircularCut home"><img className="brand-mark" src="/logo/offcut-mark-lime.svg" alt=""/><span className="brand-text"><span className="brand-name">Circular<span>Cut</span></span><span className="byline">AN EARTHSYNC PROJECT</span></span></a>
+ <a className="brand" href="https://climate-hacktion-2026.github.io/offcut-to-order/" aria-label="CircularCut home"><img className="brand-mark" src="/logo/offcut-mark-lime.svg" alt=""/><span className="brand-text"><span className="brand-name">Circular<span>Cut</span></span><span className="byline">AN EARTHSYNC PROJECT</span></span></a>
  <div className="sidebar-rule"/>
  <TabsList className="nav"><TabsTrigger className="nav-item" value="workbench"><Ruler size={16}/>Plan a cut</TabsTrigger><TabsTrigger className="nav-item" value="materials"><Layers3 size={16}/>Marketplace</TabsTrigger><TabsTrigger className="nav-item" value="evidence"><Leaf size={16}/>Impact</TabsTrigger>
  <div className="nav-divider"><span>More</span></div>

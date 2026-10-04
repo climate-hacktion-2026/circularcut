@@ -44,8 +44,8 @@ def rewrite_links(markup: str) -> str:
     def attribute(match: re.Match[str]) -> str:
         name, quote, value = match.group(1), match.group(2), match.group(3)
         if name.lower() == "href":
-            if value == "/app":
-                value = APP_URL + "/app"
+            if value == "/app" or value.startswith("/app?") or value.startswith("/app#"):
+                value = APP_URL + value
             elif value == "/":
                 value = BASE + "/"
             elif value == "/about":

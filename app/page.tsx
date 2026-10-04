@@ -15,10 +15,10 @@ export default function Page() {
             </Link>
             <div className="hero-nav-links">
               <a href="#how">How it works</a>
-              <Link href="/app">Marketplace</Link>
+              <Link href="/app?tab=materials">Marketplace</Link>
               <Link href="/about">About</Link>
               <Link href="/app">Sign in</Link>
-              <Link href="/app" className="btn btn--dark">List an offcut</Link>
+              <Link href="/app?tab=materials" className="btn btn--dark">List an offcut</Link>
             </div>
           </nav>
           <div className="hero-grid">
@@ -28,7 +28,7 @@ export default function Page() {
               <p className="lede">Tell us the panels you need to cut. We find a nearby workshop&rsquo;s leftover timber that fits, kerf included, before it goes to landfill.</p>
               <div className="hero-ctas">
                 <Link href="/app" className="btn btn--dark btn--lg">Find an offcut that fits</Link>
-                <Link href="/app" className="btn btn--secondary btn--lg">List your offcuts</Link>
+                <Link href="/app?tab=materials" className="btn btn--secondary btn--lg">List your offcuts</Link>
               </div>
               <span className="hero-reassure">FREE DURING PILOT &middot; LISTING TAKES 2 MIN</span>
             </div>
@@ -111,7 +111,7 @@ export default function Page() {
         <div className="site-wrap" style={{ position: 'relative', zIndex: 1 }}>
           <h2>Got offcuts in the corner?</h2>
           <p>List them once. We&rsquo;ll tell you when a job nearby needs exactly that piece.</p>
-          <Link href="/app" className="btn btn--primary btn--lg">List an offcut</Link>
+          <Link href="/app?tab=materials" className="btn btn--primary btn--lg">List an offcut</Link>
           <div className="cta-footline">
             <span>OFFCUT-TO-ORDER &middot; BUILT FOR GREEN INDUSTRIALIZATION &amp; ZERO WASTE</span>
             <span>CO&#8322;e FIGURES ARE SCENARIO ESTIMATES &middot; NO METHANE CLAIMS</span>
