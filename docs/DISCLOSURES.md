@@ -30,15 +30,14 @@ current submission's real stack; update again if anything changes before close.
 |---|---|---|
 | — | | None — all listings, prices, distances and feedback in the demo are fictional sample data |
 
-## AI tools
+## AI declaration
 
-| Tool | Used for |
-|---|---|
-| Claude (Claude Code) | Restyled the CircularCut app (globals.css, shell/nav layout, component markup) to the Timber Yard/Organic design system; cut-diagram recolouring; this disclosures update |
-| Claude (claude.ai Design) | Earlier visual-design wireframe exploration and the CircularCut logo/mark, generated during the event window |
-| OpenAI ChatGPT app-building platform ("site creator" / Vinext starter) | Shah's original CircularCut build: project scaffold, cutting-plan engine, exchange/reservation backend, ChatGPT sign-in integration (`app/chatgpt-auth.ts`), Cloudflare D1 hosting config (`.openai/hosting.json`) |
+The team has agreed on the following statement as its authoritative AI
+declaration:
 
-**Needs confirming with Shah before submission:** the exact OpenAI product/tool name and how much of the original app logic (vs. scaffold) was AI-generated through it, so this line is precise rather than inferred from the repo's config files.
+> ChatGPT/OpenAI assisted prototype development and submission preparation.
+> Claude assisted an alternative team prototype and design work. Gemini generated
+> illustrative animation. The video narration was recorded by a team member.
 
 ## Other assets / templates
 
@@ -49,7 +48,7 @@ current submission's real stack; update again if anything changes before close.
 | `shadcn-tailwind-4.13.0.css` (`source/vendor/`) | shadcn/ui generated theme layer | MIT, see `vendor/shadcn-tailwind-4.13.0.LICENSE.md` |
 | About page team photos (`public/team/kai.jpg`, `shah.jpg`, `jaycee.jpg`) | Team members' own photos | Original, team-owned |
 | About page placeholder photo (`public/team/shelly.jpg`) | "Laughing Kookaburra - male.jpg" by Peter Firminger, via Wikimedia Commons, cropped | CC BY 2.0 |
-| About page placeholder photo (`public/team/tasfia.jpg`) | "Quokka sonriendo.jpg" by PerasNevadas, via Wikimedia Commons, cropped | CC BY-SA 4.0 |
+| About page placeholder photo (`public/team/tasfia.png`) | Team-supplied replacement image | Source and licence to be confirmed by the team |
 
 ## Note
 

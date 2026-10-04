@@ -137,8 +137,8 @@ export default function Page() {
               </div>
             </div>
             <div className="about-competition-wrap">
-              <span className="about-string" />
               <div className="about-competition-card">
+                <span className="about-string" />
                 <span className="hero-tag-hole" />
                 <span className="about-card-eyebrow">Entered in</span>
                 <strong>Climate Hack-tion<br />2026</strong>
