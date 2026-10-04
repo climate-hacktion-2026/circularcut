@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/offcut-lockup-dark.svg">
-    <img src="assets/offcut-lockup.svg" alt="Offcut-to-Order" width="420">
+    <source media="(prefers-color-scheme: dark)" srcset="assets/offcut-lockup-dark.svg?v=2">
+    <img src="assets/offcut-lockup.svg?v=2" alt="Offcut-to-Order" width="420">
   </picture>
 </p>
 
@@ -43,11 +43,11 @@ Links: [Event hub](https://hackjunction.app/hackathons/climate-hack-tion) ·
 
 | Name | GitHub | Role |
 |---|---|---|
-| Kai | [@KaiCryan](https://github.com/KaiCryan) | |
-| Shah Noor Mostafa | [@shahnoormostafa-coder](https://github.com/shahnoormostafa-coder) | |
-| Jaycee | [@jayceemaimia-debug](https://github.com/jayceemaimia-debug) | |
-| Tasfia | [@tasfiadija1](https://github.com/tasfiadija1) | |
-| Shelly | [@ui-ue](https://github.com/ui-ue) | |
+| Kai | [@KaiCryan](https://github.com/KaiCryan) | Product design & prototype development |
+| Shah | [@shahnoormostafa-coder](https://github.com/shahnoormostafa-coder) | Prototype engineering & video narration |
+| Jaycee | [@jayceemaimia-debug](https://github.com/jayceemaimia-debug) | Project description & prototype ideation |
+| Tasfia | [@tasfiadija1](https://github.com/tasfiadija1) | Punchline & prototype support |
+| Shelly | [@ui-ue](https://github.com/ui-ue) | Presentation design & prototype ideation |
 
 Team's full — 5 members. Tasfia and Shelly's invites are still pending acceptance.
 
