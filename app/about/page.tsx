@@ -197,7 +197,7 @@ export default function Page() {
             <p>Judges, workshops, sponsors or anyone with a pile of offcuts: we reply within two days.</p>
           </div>
           <div className="about-contact-actions">
-            <a className="about-email-link" href="mailto:kaithecryan@gmail.com"><span>Contact the team</span><strong>kaithecryan@gmail.com</strong></a>
+            <a className="about-email-link" href="mailto:alexander.cryan@students.mq.edu.au"><span>Contact the team</span><strong>alexander.cryan@students.mq.edu.au</strong></a>
             <div className="about-contact-links">
               <a className="btn btn--secondary" href="https://github.com/climate-hacktion-2026/circularcut" target="_blank" rel="noreferrer">GitHub repo ↗</a>
               <a className="btn btn--secondary" href="https://github.com/climate-hacktion-2026/circularcut/blob/main/submission/CircularCut-Presentation-Final.pdf" target="_blank" rel="noreferrer">Pitch deck ↗</a>
