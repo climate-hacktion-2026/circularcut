@@ -413,6 +413,13 @@ svg{flex-shrink:0}
 .btn--dark{background:var(--ink);color:var(--surface);box-shadow:0 4px 0 var(--shadow-deep)}
 .btn--secondary{background:var(--surface);color:var(--ink);box-shadow:0 4px 0 var(--ink)}
 .btn--ghost{background:transparent;border-color:transparent;box-shadow:none;text-decoration:underline dashed;text-underline-offset:5px}
+/* Public-page controls share the same physical button treatment. */
+.site .btn,.site .role-pill,.site .rating-dot{box-shadow:0 4px 0 var(--ink)}
+.site .btn{border:2px solid var(--ink)}
+.site .role-pill,.site .rating-dot{border-width:2px}
+.site .role-pill[aria-pressed=true],.site .rating-dot[aria-pressed=true]{box-shadow:0 4px 0 var(--ink)}
+.site .btn:active,.site .role-pill:active,.site .rating-dot:active{transform:translateY(4px);box-shadow:none!important}
+
 @media(max-width:900px){.site-wrap{padding-left:28px;padding-right:28px}.hero-grid{grid-template-columns:1fr}.hero-visual{justify-self:center;margin-top:20px}.hero--landing{padding-bottom:72px}.hero--landing .hero-grid{grid-template-columns:1fr;gap:36px;padding:52px 0 36px}.hero--landing .hero-visual{justify-self:center;margin-top:0}.proof-row{grid-template-columns:1fr}}
 @media(max-width:600px){.site-wrap{padding-left:20px;padding-right:20px}}
 
