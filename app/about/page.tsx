@@ -9,10 +9,10 @@ const team = [
     role: 'Product design & prototype development',
     contribution: 'Timber Yard design system, product design and cutting-plan UI.',
     github: 'https://github.com/KaiCryan',
-    linkedin: null,
-    portfolio: null,
+    linkedin: 'https://www.linkedin.com/in/kaicryan/',
+    portfolio: 'https://kaicryan.dev/',
     photo: '/team/kai.jpg',
-    degree: 'Major. Software Technology',
+    degree: 'Bachelor of Information Technology, Maj. Software Technology · Macquarie University',
   },
   {
     name: 'Shah',
@@ -41,7 +41,7 @@ const team = [
     github: 'https://github.com/tasfiadija1',
     linkedin: null,
     portfolio: null,
-    photo: null,
+    photo: '/team/tasfia.jpg',
     degree: 'Bachelor of Computer Engineering (Software) · University of Sydney',
   },
   {
@@ -146,7 +146,7 @@ export default function Page() {
                 <span className="about-rule" />
                 <span className="hero-tag-pill">Green Industrialization</span>
                 <span className="hero-tag-pill hero-tag-pill--fill">Zero Waste &amp; Methane Reduction</span>
-                <span className="about-placeholder">[University placeholder] · [City placeholder]</span>
+                <span className="about-placeholder">Australia · Fully online</span>
               </div>
             </div>
           </div>
@@ -200,7 +200,7 @@ export default function Page() {
           <div className="about-contact-actions">
             <a className="about-email-link" href="mailto:kaithecryan@gmail.com"><span>Contact the team</span><strong>kaithecryan@gmail.com</strong></a>
             <div className="about-contact-links">
-              <a className="btn btn--secondary" href="https://github.com/climate-hacktion-2026/offcut-to-order" target="_blank" rel="noreferrer">GitHub repo ↗</a>
+              <a className="btn btn--secondary" href="https://github.com/climate-hacktion-2026/circularcut" target="_blank" rel="noreferrer">GitHub repo ↗</a>
               <span className="about-profile-placeholder">Pitch deck · placeholder</span>
             </div>
           </div>

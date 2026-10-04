@@ -49,6 +49,7 @@ current submission's real stack; update again if anything changes before close.
 | `shadcn-tailwind-4.13.0.css` (`source/vendor/`) | shadcn/ui generated theme layer | MIT, see `vendor/shadcn-tailwind-4.13.0.LICENSE.md` |
 | About page team photos (`public/team/kai.jpg`, `shah.jpg`, `jaycee.jpg`) | Team members' own photos | Original, team-owned |
 | About page placeholder photo (`public/team/shelly.jpg`) | "Laughing Kookaburra - male.jpg" by Peter Firminger, via Wikimedia Commons, cropped | CC BY 2.0 |
+| About page placeholder photo (`public/team/tasfia.jpg`) | "Quokka sonriendo.jpg" by PerasNevadas, via Wikimedia Commons, cropped | CC BY-SA 4.0 |
 
 ## Note
 
