@@ -8,9 +8,10 @@ A marketplace that matches one workshop's leftover timber offcuts to another
 workshop's next cutting job, with a real kerf-aware cut-plan calculator — not just
 a listing board.
 
-**🔗 [Live demo](https://climate-hacktion-2026.github.io/offcut-to-order/)** — served
-from the `feat/offcut-to-order-prototype` branch until [PR #2](https://github.com/climate-hacktion-2026/offcut-to-order/pull/2)
-is reviewed and merged into `main`.
+**Live demo:** pending deployment (see open items below) — see
+[PR #3](https://github.com/climate-hacktion-2026/offcut-to-order/pull/3) for progress.
+The earlier static-prototype demo link is retired; that version is preserved on the
+`old-prototype` branch.
 
 ## Event basics
 
@@ -58,9 +59,11 @@ Teams need **3–5 members**. Org/repo invite sent to @jayceemaimia-debug — pe
   Impact is tracked as area/weight actually diverted from new stock, with an
   explicitly-labelled scenario CO₂e estimate (editable assumptions, not a measured
   figure) rather than an overclaimed number.
-- **Tech stack:** Static HTML/CSS/JS (no build step), inline SVG for the cut
-  diagrams, deployed as a Claude Artifact for the live demo; this repo holds the
-  source.
+- **Tech stack:** Next.js (React) app with inline SVG for the cut diagrams,
+  shadcn/ui + Radix UI primitives, Drizzle ORM over Cloudflare D1 for the shared
+  exchange/reservation backend. Visual design is a custom "Timber Yard / Organic"
+  CSS design system (`app/globals.css`) — not a component library theme. See
+  [`docs/DISCLOSURES.md`](docs/DISCLOSURES.md) for the full dependency list.
 
 ## Judging criteria (for reference while building)
 
