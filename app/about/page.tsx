@@ -200,7 +200,7 @@ export default function Page() {
             <a className="about-email-link" href="mailto:kaithecryan@gmail.com"><span>Contact the team</span><strong>kaithecryan@gmail.com</strong></a>
             <div className="about-contact-links">
               <a className="btn btn--secondary" href="https://github.com/climate-hacktion-2026/circularcut" target="_blank" rel="noreferrer">GitHub repo ↗</a>
-              <span className="about-profile-placeholder">Pitch deck · placeholder</span>
+              <a className="btn btn--secondary" href="https://github.com/climate-hacktion-2026/circularcut/blob/main/submission/CircularCut-Presentation-Final.pdf" target="_blank" rel="noreferrer">Pitch deck ↗</a>
             </div>
           </div>
         </div>
