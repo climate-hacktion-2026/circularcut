@@ -349,7 +349,7 @@ svg{flex-shrink:0}
 .hero-nav{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;padding:28px 0}
 .hero-nav-links{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
 .hero-nav-links a:not(.btn){font-family:var(--f-label);font-size:14px;font-weight:700!important;text-transform:uppercase;letter-spacing:.12em;color:var(--ink);text-decoration:none}
-.hero-nav-links a:not(.btn):hover{text-decoration:underline dashed;text-underline-offset:6px}
+.hero-nav-links a:not(.btn):hover{text-decoration-line:underline;text-decoration-style:dashed;text-decoration-color:var(--ink);text-decoration-thickness:3px;text-underline-offset:6px}
 .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,460px);gap:56px;align-items:center;padding:52px 0 24px}
 /* Landing-only scale and overlap; About keeps its compact hero. */
 .hero--landing{padding-bottom:104px}
@@ -423,7 +423,7 @@ svg{flex-shrink:0}
 /* About page reconstructed from the public wireframe. */
 .about-brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);font-family:var(--f-display);font-size:22px;text-transform:uppercase;letter-spacing:-.005em}
 .about-brand img{display:block;flex:none}
-.hero-nav-links a[aria-current=page]{font-weight:700!important;text-decoration:underline dashed;text-decoration-thickness:3px!important;text-underline-offset:7px}
+.hero-nav-links a[aria-current=page]{font-weight:700!important;text-decoration-line:underline;text-decoration-style:dashed;text-decoration-color:var(--ink);text-decoration-thickness:3px!important;text-underline-offset:7px}
 .about-hero{padding-bottom:104px}
 .about-hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,380px);gap:64px;padding:56px 0 52px}
 .about-hero-copy{display:flex;flex-direction:column;align-items:flex-start;gap:28px;min-width:0}
