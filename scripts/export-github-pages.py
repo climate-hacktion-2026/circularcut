@@ -8,6 +8,7 @@ hydration payloads, and writes a self-contained static site to docs/.
 from html import escape
 from pathlib import Path
 from urllib.request import urlopen
+import hashlib
 import re
 import shutil
 
@@ -103,9 +104,15 @@ def main() -> None:
     if not client_css:
         raise RuntimeError("Build CSS not found; run npm run build first")
     css = copy_assets(client_css[0].read_text())
+    wave_hash = hashlib.sha256((DOCS / "hero-wave.svg").read_bytes()).hexdigest()[:12]
+    css = css.replace(f"{BASE}/hero-wave.svg", f"{BASE}/hero-wave.svg?v={wave_hash}")
     css += "\n.pages-demo-note{background:var(--ink);color:var(--bg);padding:14px 0;font:14px/1.5 var(--f-body)}.pages-demo-note .site-wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}.pages-demo-note a{color:var(--accent);text-decoration:underline}\n"
     (DOCS / "assets").mkdir(parents=True, exist_ok=True)
-    (DOCS / "assets/site.css").write_text(css)
+    css_hash = hashlib.sha256(css.encode()).hexdigest()[:12]
+    css_filename = f"site.{css_hash}.css"
+    for stale in [DOCS / "assets/site.css", *DOCS.glob("assets/site.*.css")]:
+        stale.unlink(missing_ok=True)
+    (DOCS / "assets" / css_filename).write_text(css)
     static_js = '''document.querySelectorAll(".about-feedback-form").forEach((form) => {
   form.querySelectorAll(".role-toggle, .rating-row").forEach((group) => {
     group.querySelectorAll("button").forEach((button) => {
@@ -141,7 +148,7 @@ def main() -> None:
             '<title>Offcut-to-Order — EarthSync</title>'
             '<meta name="description" content="Offcut-to-Order matches workshop orders with reusable timber offcuts.">'
             f'<link rel="icon" type="image/svg+xml" href="{BASE}/favicon.svg">'
-            f'<link rel="stylesheet" href="{BASE}/assets/site.css">'
+            f'<link rel="stylesheet" href="{BASE}/assets/{css_filename}">'
             '</head><body'
             + (f' class="{escape(body_class, quote=True)}"' if body_class else "")
             + '>' + content + f'<script src="{BASE}/assets/marketing.js" defer></script></body></html>'
