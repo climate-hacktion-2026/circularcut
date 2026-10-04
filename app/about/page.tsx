@@ -12,7 +12,7 @@ const team = [
     linkedin: null,
     portfolio: null,
     photo: '/team/kai.jpg',
-    degree: 'Bachelor of Information Technology, majoring in Software Technology · Macquarie University',
+    degree: 'Major. Software Technology',
   },
   {
     name: 'Shah',
