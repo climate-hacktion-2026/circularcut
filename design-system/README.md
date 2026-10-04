@@ -12,12 +12,13 @@ Recreate the designs in the target codebase's stack, e.g. React/Next, Vue or Sve
 **High-fidelity.** Colours, type, radii, shadows, tilt angles and component treatments are final; recreate them exactly. Copy in the prototype is realistic sample data.
 
 ## Files in this package
-- `CLAUDE.md`: the binding design rules. Copy it to the repo root so Claude Code reads it on every task.
+- `offcut.css` and the reference screens contain the original design handoff;
+  `app/globals.css` is the source of truth for the implemented application.
 - `offcut.css`: design tokens plus the component layer (shell, buttons, cards, fields, tags, stamps, hanging tags, diagrams, blobs, hero).
 - `icons.svg`: the tool-glyph icon sprite (square, planks, clipboard, saw blade, tape measure, search).
 - `wave-edge.js`: generator for the wavy hero edge (`clip-path`).
 - `reference/CircularCut Organic.dc.html` + `support.js`: the 5-screen prototype (frames 1a–1e).
-- `logo/`: "seed blade" brand mark (full colour, single colour, tile/favicon, horizontal lockup) as SVG. Rules are in CLAUDE.md §Logo; the visual sheet is `screenshots/06-logo-sheet.png`.
+- `logo/`: "seed blade" brand mark (full colour, single colour, tile/favicon, horizontal lockup) as SVG. The visual sheet is `screenshots/06-logo-sheet.png`.
 - `screenshots/00-landing.png`, `07-about-contact.png`: public pages.
 - `screenshots/01-overview.png` … `05-impact.png`: full-length 1440px captures of each screen, for visual comparison. Dashed green sticky notes in the captures are design annotations; don't ship them.
 

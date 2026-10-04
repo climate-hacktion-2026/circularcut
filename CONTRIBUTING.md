@@ -9,8 +9,8 @@ Planning docs, this scaffold, and README edits are fine before then.
 ## Branching
 
 - `main` stays deployable/demo-able at all times.
-- Work in feature branches: `feat/<short-name>`, `fix/<short-name>`.
-- Open a PR into `main`, at least one teammate reviews before merge.
+- Completed maintenance changes are committed and pushed directly to `main`.
+- Use a feature branch or pull request only when the team explicitly asks for one.
 
 ## Commits
 
@@ -32,5 +32,6 @@ fixes after that are fine; new functionality is not.
 ## Note on branding
 
 The EarthSync logo used in the original scaffold repo was designed before kickoff
-and is intentionally not used here. The current logo (`assets/offcut-*.svg`) was
-generated fresh during the event window — see `docs/DISCLOSURES.md` for the entry.
+and is intentionally not used here. The current README lockups are
+`assets/circularcut-lockup*.svg`; the application marks are under `public/logo/`.
+See `docs/DISCLOSURES.md` for the disclosure entry.
