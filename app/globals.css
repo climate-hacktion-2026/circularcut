@@ -352,12 +352,12 @@ svg{flex-shrink:0}
 .hero-nav-links a:not(.btn):hover{text-decoration-line:underline;text-decoration-style:dashed;text-decoration-color:var(--ink);text-decoration-thickness:3px;text-underline-offset:6px}
 .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,460px);gap:56px;align-items:center;padding:52px 0 24px}
 /* Landing-only scale and overlap; About keeps its compact hero. */
-.hero--landing{padding-bottom:104px}
-.hero--landing .hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,520px);gap:64px;padding:76px 0 48px}
+.hero--landing{padding-bottom:128px}
+.hero--landing .hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,520px);gap:64px;padding:100px 0 72px}
 .hero--landing h1{font-size:clamp(64px,8.4vw,128px);line-height:.88;max-width:11ch}
 .hero--landing .hero-visual{position:relative;justify-self:end;width:100%;max-width:520px;padding-top:124px}
 .hero--landing .hero-tag{position:absolute;top:0;left:18px;z-index:2;width:min(270px,78%);margin:0;transform:rotate(-5deg)}
-.hero--landing .hero-tag-pin{position:absolute;top:-42px;left:29px;z-index:0;width:2px;height:56px;background:var(--ink);transform:rotate(-24deg);transform-origin:bottom}
+.hero--landing .hero-tag-pin{position:absolute;top:-30px;left:27px;z-index:0;width:2px;height:56px;background:var(--ink);transform:rotate(-24deg);transform-origin:bottom}
 .hero--landing .hero-tag-body{position:relative;z-index:1;padding:20px 22px}
 .hero--landing .hero-result{margin-top:0;padding:30px;gap:18px}
 .hero--landing .hero-result>svg{width:100%;height:auto}
@@ -386,7 +386,7 @@ svg{flex-shrink:0}
 .hero-result-job strong{display:block;font-family:var(--f-mono);font-size:13px;letter-spacing:0;text-transform:none;color:var(--ink);margin-top:3px}
 .hero-result-footer{display:flex;justify-content:space-between;align-items:center;font-family:var(--f-mono);font-size:12px}
 .hero-result-footer strong{color:var(--a7);font-family:var(--f-label);letter-spacing:.07em;text-transform:uppercase}
-.proof-wrap{padding-top:72px;padding-bottom:8px;background:var(--bg)}.proof-row{display:grid;grid-template-columns:repeat(3,1fr);gap:64px;padding:0;align-items:end}
+.proof-wrap{padding-top:92px;padding-bottom:8px;background:var(--bg)}.proof-row{display:grid;grid-template-columns:repeat(3,1fr);gap:64px;padding:0;align-items:end}
 .proof-row>div{display:flex;flex-direction:column;gap:6px}
 .proof-row strong{font-family:var(--f-mono);font-size:clamp(36px,4vw,52px);font-weight:600;letter-spacing:-.03em;line-height:1}
 .proof-row span{font-family:var(--f-label);font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.14em;color:var(--tmuted)}
@@ -424,20 +424,20 @@ svg{flex-shrink:0}
 .about-brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);font-family:var(--f-display);font-size:22px;text-transform:uppercase;letter-spacing:-.005em}
 .about-brand img{display:block;flex:none}
 .hero-nav-links a[aria-current=page]{font-weight:700!important;text-decoration-line:underline;text-decoration-style:dashed;text-decoration-color:var(--ink);text-decoration-thickness:3px!important;text-underline-offset:7px}
-.about-hero{padding-bottom:104px}
-.about-hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,380px);gap:64px;padding:56px 0 52px}
+.about-hero{padding-bottom:128px}
+.about-hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,460px);gap:64px;padding:56px 0 52px}
 .about-hero-copy{display:flex;flex-direction:column;align-items:flex-start;gap:28px;min-width:0}
 .about-hero-copy h1{margin:0;font-size:clamp(56px,7vw,112px);line-height:.88;max-width:10ch;text-wrap:balance}
 .about-hero-copy .lede{margin:0;max-width:480px}
 .about-hero-copy .hero-ctas{margin-top:0}
-.about-competition-wrap{position:relative;justify-self:center;width:min(100%,380px);padding-top:16px;filter:drop-shadow(0 4px 0 var(--ink))}
-.about-competition-card{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:14px;padding:32px;background:var(--surface);border-radius:var(--r-tag);transform:rotate(3deg)}
-.about-competition-card .hero-tag-hole{position:absolute;top:20px;left:20px;width:14px;height:14px}
-.about-card-eyebrow{padding-left:26px;font-family:var(--f-label);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
-.about-competition-card strong{font-family:var(--f-display);font-size:clamp(32px,4vw,42px);line-height:.95;text-transform:uppercase}
+.about-competition-wrap{position:relative;justify-self:center;width:min(100%,460px);padding-top:16px;filter:drop-shadow(0 4px 0 var(--ink))}
+.about-competition-card{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:16px;padding:40px;background:var(--surface);border-radius:var(--r-tag);transform:rotate(3deg)}
+.about-competition-card .hero-tag-hole{position:absolute;top:24px;left:24px;width:16px;height:16px}
+.about-card-eyebrow{padding-left:30px;font-family:var(--f-label);font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+.about-competition-card strong{font-family:var(--f-display);font-size:clamp(38px,4.8vw,52px);line-height:.95;text-transform:uppercase}
 .about-rule{width:100%;border-top:1.5px dashed var(--tborder)}
 .about-placeholder{font-family:var(--f-mono);font-size:11px;color:var(--tmuted)}
-.about-string{position:absolute;top:-12px;left:18px;width:2px;height:58px;background:var(--ink);transform:rotate(-24deg);transform-origin:bottom;z-index:1}
+.about-string{position:absolute;top:-10px;left:31px;width:2px;height:58px;background:var(--ink);transform:rotate(-24deg);transform-origin:bottom;z-index:1}
 .about-team-section{max-width:1320px;margin:0 auto;padding:96px 64px 120px;display:flex;flex-direction:column;gap:56px}
 .about-section-intro{display:flex;flex-direction:column;gap:16px}
 .about-section-intro h2,.about-contact-copy h2,.about-feedback-copy h2{font-size:clamp(40px,4.6vw,64px);line-height:.95;text-wrap:balance}
@@ -460,7 +460,7 @@ svg{flex-shrink:0}
 .about-profile-link,.about-profile-placeholder{min-height:34px;padding:0 12px;border:1.5px solid var(--ink);border-radius:var(--r-pill);display:inline-flex;align-items:center;font-family:var(--f-label);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);text-decoration:none}
 .about-profile-link:hover{background:var(--accent)}
 .about-profile-placeholder{border-style:dashed;color:var(--tmuted)}
-.about-person-string{position:absolute;top:-22px;left:8px;width:2px;height:46px;background:var(--tmuted);transform:rotate(-28deg);transform-origin:bottom}
+.about-person-string{position:absolute;top:-21px;left:24px;width:2px;height:46px;background:var(--tmuted);transform:rotate(-28deg);transform-origin:bottom}
 .about-contact-section{max-width:1320px;margin:0 auto;padding:0 64px 120px}
 .about-contact-card{position:relative;background:var(--surface);border:2px solid var(--ink);border-radius:var(--r-blobcard);box-shadow:0 5px 0 var(--ink);padding:56px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:48px;align-items:center}
 .about-contact-copy{display:flex;flex-direction:column;gap:16px}
