@@ -18,9 +18,21 @@ const team = [
   },
   {
     name: 'Jaycee',
-    role: 'Contributor · role pending',
-    contribution: 'Role and contribution pending confirmation.',
+    role: 'Role pending',
+    contribution: null,
     github: 'https://github.com/jayceemaimia-debug',
+  },
+  {
+    name: 'Tasfia',
+    role: 'Role pending',
+    contribution: null,
+    github: 'https://github.com/tasfiadija1',
+  },
+  {
+    name: 'Shelly',
+    role: 'Role pending',
+    contribution: null,
+    github: 'https://github.com/ui-ue',
   },
 ];
 
@@ -139,11 +151,9 @@ export default function Page() {
                   <span className="about-person-role">{member.role}</span>
                   <span className="about-placeholder">[Degree · University placeholder]</span>
                 </div>
-                <p className="about-contribution">{member.contribution}</p>
+                {member.contribution && <p className="about-contribution">{member.contribution}</p>}
                 <div className="about-person-links">
                   <a className="about-profile-link" href={member.github} target="_blank" rel="noreferrer">GitHub ↗</a>
-                  <span className="about-profile-placeholder">LinkedIn · placeholder</span>
-                  <span className="about-profile-placeholder">Email · placeholder</span>
                 </div>
               </div>
               <span className="about-person-string" />
@@ -160,10 +170,9 @@ export default function Page() {
             <p>Judges, workshops, sponsors or anyone with a pile of offcuts: we reply within two days.</p>
           </div>
           <div className="about-contact-actions">
-            <p className="about-email-placeholder"><span>Placeholder · confirm before launch</span><strong>team@offcut-to-order.app</strong></p>
+            <a className="about-email-link" href="mailto:kaithecryan@gmail.com"><span>Contact the team</span><strong>kaithecryan@gmail.com</strong></a>
             <div className="about-contact-links">
               <a className="btn btn--secondary" href="https://github.com/climate-hacktion-2026/offcut-to-order" target="_blank" rel="noreferrer">GitHub repo ↗</a>
-              <span className="about-profile-placeholder">LinkedIn · placeholder</span>
               <span className="about-profile-placeholder">Pitch deck · placeholder</span>
             </div>
           </div>
