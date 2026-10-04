@@ -14,8 +14,8 @@ import shutil
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
-BASE = "/offcut-to-order"
-REPO_URL = "https://github.com/climate-hacktion-2026/offcut-to-order"
+BASE = "/circularcut"
+REPO_URL = "https://github.com/climate-hacktion-2026/circularcut"
 APP_URL = "https://offcut-to-order-circularcut-demo.earthsync-circularcut-demo.workers.dev"
 SERVER = "http://127.0.0.1:8788"
 

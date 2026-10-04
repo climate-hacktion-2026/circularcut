@@ -60,7 +60,7 @@ export default function CircularCut(){
 
  return <><Tabs value={tab} onValueChange={setTab} orientation="vertical"><div className="app">
  <aside className="sidebar">
- <a className="brand" href="https://climate-hacktion-2026.github.io/offcut-to-order/" aria-label="CircularCut home"><img className="brand-mark" src="/logo/offcut-mark-lime.svg" alt=""/><span className="brand-text"><span className="brand-name">Circular<span>Cut</span></span><span className="byline">AN EARTHSYNC PROJECT</span></span></a>
+ <a className="brand" href="https://climate-hacktion-2026.github.io/circularcut/" aria-label="CircularCut home"><img className="brand-mark" src="/logo/offcut-mark-lime.svg" alt=""/><span className="brand-text"><span className="brand-name">Circular<span>Cut</span></span><span className="byline">AN EARTHSYNC PROJECT</span></span></a>
  <div className="sidebar-rule"/>
  <TabsList className="nav"><TabsTrigger className="nav-item" value="workbench"><Ruler size={16}/>Plan a cut</TabsTrigger><TabsTrigger className="nav-item" value="materials"><Layers3 size={16}/>Marketplace</TabsTrigger><TabsTrigger className="nav-item" value="evidence"><Leaf size={16}/>Impact</TabsTrigger>
  <div className="nav-divider"><span>More</span></div>

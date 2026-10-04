@@ -13,9 +13,8 @@ A marketplace that matches one workshop's leftover timber offcuts to another
 workshop's next cutting job, with a real kerf-aware cut-plan calculator — not just
 a listing board.
 
-**GitHub Pages preview:** https://climate-hacktion-2026.github.io/offcut-to-order/ — static landing and About pages.
+**GitHub Pages preview:** https://climate-hacktion-2026.github.io/circularcut/ — static landing and About pages.
 **Interactive demo:** https://offcut-to-order-circularcut-demo.earthsync-circularcut-demo.workers.dev/app — Cloudflare Workers + D1; anonymous cookie-based workspaces contain demo data that visitors can change.
-See [PR #3](https://github.com/climate-hacktion-2026/offcut-to-order/pull/3) for app progress.
 
 ## Event basics
 
